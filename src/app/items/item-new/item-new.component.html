@@ -1,0 +1,155 @@
+<fieldset>
+  <h3>Add an Item</h3>
+  <form (submit)="onSubmit(form)" #form="ngForm">
+    <div>
+
+      <div class="one-third padded">
+        <div>
+          <label class="one-third label-left" for="description">
+            Description
+          </label>
+          <input
+            class="two-thirds"
+            type="text"
+            id="description"
+            name="description"
+            required
+            [(ngModel)]="item.description"
+          >
+        </div>
+        <div>
+          <label class="one-third label-left" for="quantity">
+            Quantity
+          </label>
+          <input
+            class="two-thirds"
+            type="number"
+            id="quantity"
+            name="quantity"
+            min=1
+            required
+            [(ngModel)]="item.quantity"
+          >
+        </div>
+        <div>
+          <label class="one-third label-left" for="requestedBy">
+            Requested By
+          </label>
+          <input
+            class="two-thirds"
+            type="text"
+            id="requestedBy"
+            name="requestedBy"
+            required
+            [(ngModel)]="item.requestedBy"
+          >
+        </div>
+        <div>
+          <label class="one-third label-left" for="department">
+            Department
+          </label>
+          <select
+            class="two-thirds"
+            type="text"
+            id="department"
+            name="department"
+            required
+            [(ngModel)]="item.department"
+          >
+            <option value="R+E">R+E</option>
+            <option value="SBR">SBR</option>
+            <option value="OEM">OEM</option>
+            <option value="Paint">Paint</option>
+            <option value="Frame">Frame</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="one-third padded">
+        <div>
+          <label class="one-third label-left" for="vendor">
+            Vendor
+          </label>
+          <input
+            class="two-thirds"
+            type="text"
+            id="vendor"
+            name="vendor"
+            [(ngModel)]="item.vendor"
+          >
+        </div>
+        <div>
+          <label class="one-third label-left" for="partNumber">
+            Part Number
+          </label>
+          <input
+            class="two-thirds"
+            type="text"
+            id="partNumber"
+            name="partNumber"
+            [(ngModel)]="item.partNumber"
+          >
+        </div>
+        <div>
+          <label class="one-third label-left" for="cost">
+            Cost
+          </label>
+          <input
+            class="two-thirds"
+            type="text"
+            id="cost"
+            name="cost"
+            [(ngModel)]="item.cost"
+          >
+        </div>
+        <div>
+          <label class="one-third label-left" for="price">
+            Price
+          </label>
+          <input
+            class="two-thirds"
+            type="text"
+            id="price"
+            name="price"
+            [(ngModel)]="item.price"
+          >
+        </div>
+      </div>
+
+      <div class="one-third padded">
+        <div>
+          <label class="one-third label-left" for="specialOrder">
+            Special Order
+          </label>
+          <input
+            type="radio"
+            name="specialOrder"
+            value="true"
+            [(ngModel)]="item.specialOrder"
+          >Yes
+          <input
+            type="radio"
+            name="specialOrder"
+            value="false"
+            [(ngModel)]="item.specialOrder"
+            checked
+          >No<br>
+        </div>
+        <div>
+          <label class="one-third label-left" for="customer">
+            Customer
+          </label>
+          <input
+            class="two-thirds"
+            type="text"
+            id="customer"
+            name="customer"
+            [(ngModel)]="item.customer"
+          >
+        </div>
+      </div>
+
+    </div>
+    <button class="one-third right" [disabled]="form.invalid">Add Item</button>
+  </form>
+</fieldset>

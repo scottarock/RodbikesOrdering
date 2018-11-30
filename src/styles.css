@@ -1,1 +1,138 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Niramit');
+
+* {
+  margin: 0px;
+  padding: 0px;
+  font-family: Niramit, sans-serif;
+}
+
+section {
+  width: 90%;
+  margin: 10px auto;
+}
+
+nav ul {
+  padding: 4px 0px;
+  background-color: gainsboro;
+}
+
+nav li {
+  display: inline-block;
+  padding: 2px 8px;
+  border-right: 1px solid black;
+}
+
+nav li:last-child {
+  border-right: 0px;
+}
+
+nav li a {
+  color: black;
+  text-decoration: none;
+}
+
+fieldset {
+  box-sizing: border-box;
+  padding: 10px;
+  border: 1px solid gray;
+  border-radius: 3px;
+}
+
+input, select{
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 2px 4px;
+  font-size: 1em;
+  border: 1px solid darkgray;
+  border-radius: 3px;
+}
+
+input[type="radio"] {
+  width:auto;
+}
+
+button {
+  width: 100%;
+  padding: 4px 0px;
+  font-size: 1em;
+  background-color: gainsboro;
+  border: 1px solid gray;
+  border-radius: 3px;
+}
+
+button:disabled {
+  color: silver;
+  border: 1px solid silver;
+}
+
+table {
+  width: 100%;
+}
+
+table, th, td {
+  border-collapse: collapse;
+  border: 1px solid gray;
+}
+
+th, td {
+  padding: 2px 4px;
+}
+
+th, tr:nth-child(even) {
+  background-color: silver;
+}
+
+.one-quarter {
+  box-sizing: border-box;
+  display: inline-block;
+  vertical-align: top;
+  width: 25%;
+}
+
+.one-third {
+  box-sizing: border-box;
+  display: inline-block;
+  vertical-align: top;
+  width: 33%;
+}
+
+.one-half {
+  box-sizing: border-box;
+  display: inline-block;
+  vertical-align: top;
+  width: 50%;
+}
+
+.two-thirds {
+  box-sizing: border-box;
+  display: inline-block;
+  vertical-align: top;
+  width: 67%;
+}
+
+.padded {
+  padding: 2%;
+}
+
+.spaced {
+  margin-bottom: 15px;
+}
+
+.label-left {
+  display: inline-block;
+  padding-right: 1%;
+  text-align: right;
+  vertical-align: top;
+}
+
+.right {
+  float: right;
+}
+
+.ng-untouched[required], .ng-valid[required] {
+  border-left: 5px solid blue;
+}
+
+.ng-touched.ng-invalid:not(form) {
+  border-left: 5px solid red;
+}

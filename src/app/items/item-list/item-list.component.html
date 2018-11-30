@@ -1,0 +1,16 @@
+<table>
+  <thead>
+    <tr>
+      <th>Qty</th>
+      <th>Description</th>
+      <th>Vendor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of items">
+      <td>{{ item.quantity }}</td>
+      <td>{{ item.description }}</td>
+      <td>{{ item.vendor }}</td>
+    </tr>
+  </tbody>
+</table>
