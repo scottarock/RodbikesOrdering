@@ -11,7 +11,7 @@ app
   .use(parser.urlencoded({ extended: true }))
   .use(parser.json())
   .use(function(request, response, next) {
-      console.log(`request coming in for ${request.url}`);
+      console.log(`${request.method} request coming in for ${request.url}`);
       next();
     })
   .use(express.static(path.join(__dirname, 'dist/public')))

@@ -35,16 +35,38 @@ const itemSchema = new Schema({
   department: {
     type: String,
     trim: true,
+    enum: [
+      'R+E',
+      'SBR',
+      'OEM',
+      'Paint',
+      'Frame'
+    ]
   },
   specialOrder: {
     type: String,
     trim: true,
-    default: false,
+    default: 'No',
+    enum: [
+      'Yes',
+      'No'
+    ]
   },
   customer: {
     type: String,
     trim: true,
-  }
+  },
+  status: {
+    type: String,
+    trim: true,
+    default: 'Wanted',
+    enum: [
+      'Wanted',
+      'Pending',
+      'Ordered',
+      'Not Available'
+    ]
+  },
 
 });
 

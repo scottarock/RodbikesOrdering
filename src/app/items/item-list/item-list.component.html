@@ -4,6 +4,7 @@
       <th>Qty</th>
       <th>Description</th>
       <th>Vendor</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -11,6 +12,7 @@
       <td>{{ item.quantity }}</td>
       <td>{{ item.description }}</td>
       <td>{{ item.vendor }}</td>
+      <td><button (click)="onDelete(item)">Delete</button></td>
     </tr>
   </tbody>
 </table>

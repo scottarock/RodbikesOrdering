@@ -9,8 +9,9 @@ export class Item {
   partNumber: string;
   cost: number;
   price: number;
-  specialOrder: boolean = false;
+  specialOrder: string = 'No';
   customer: string;
+  status: string;
 
   constructor() { }
 

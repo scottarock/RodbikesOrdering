@@ -124,15 +124,14 @@
           <input
             type="radio"
             name="specialOrder"
-            value="true"
+            value="Yes"
             [(ngModel)]="item.specialOrder"
           >Yes
           <input
             type="radio"
             name="specialOrder"
-            value="false"
+            value="No"
             [(ngModel)]="item.specialOrder"
-            checked
           >No<br>
         </div>
         <div>
@@ -152,4 +151,5 @@
     </div>
     <button class="one-third right" [disabled]="form.invalid">Add Item</button>
   </form>
+  {{ item | json }}
 </fieldset>

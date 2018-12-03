@@ -21,4 +21,13 @@ export class ItemListComponent implements OnInit {
       });
   }
 
+  onDelete(item: Item): void{
+    this.itemService.deleteItem(item)
+      .subscribe( deletedItem => {
+        this.items = this.items.filter( i => {
+          return i._id !== deletedItem._id;
+        });
+      });
+  }
+
 }

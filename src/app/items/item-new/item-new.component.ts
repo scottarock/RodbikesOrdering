@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
 import { Item } from '../../models';
@@ -16,7 +15,6 @@ export class ItemNewComponent implements OnInit {
 
   constructor(
     private itemService: ItemService,
-    private router: Router
   ) { }
 
   ngOnInit() {
@@ -24,11 +22,17 @@ export class ItemNewComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     this.itemService.addItem(this.item)
-      .subscribe( item => {
-        console.log('item added', item);
-        this.item = new Item();
-        form.resetForm();
-      });
+      .subscribe(
+        item => {
+          console.log('item added', item);
+          form.reset();
+          this.item = new Item();
+          console.log('item reset', this.item);
+        },
+        error => {
+          console.log(error);
+        }
+      );
   }
 
 }

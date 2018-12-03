@@ -8,12 +8,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import * as fromHome from './home';
 import * as fromItems from './items';
+import { ItemHybridComponent } from './items/item-hybrid/item-hybrid.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ...fromItems.components,
-    ...fromHome.components
+    ...fromHome.components,
+    ItemHybridComponent
   ],
   imports: [
     BrowserModule,
