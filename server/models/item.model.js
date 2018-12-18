@@ -18,6 +18,17 @@ const itemSchema = new Schema({
     trim: true,
     required: [true, 'requested by is required'],
   },
+  department: {
+    type: String,
+    trim: true,
+    enum: [
+      'R+E',
+      'SBR',
+      'OEM',
+      'Paint',
+      'Frame'
+    ]
+  },
   vendor: {
     type: String,
     trim: true,
@@ -31,17 +42,6 @@ const itemSchema = new Schema({
   },
   price: {
     type: Number,
-  },
-  department: {
-    type: String,
-    trim: true,
-    enum: [
-      'R+E',
-      'SBR',
-      'OEM',
-      'Paint',
-      'Frame'
-    ]
   },
   specialOrder: {
     type: String,
@@ -64,8 +64,16 @@ const itemSchema = new Schema({
       'Wanted',
       'Pending',
       'Ordered',
+      'Received',
       'Not Available'
     ]
+  },
+  requestedOn: {
+    type: Date,
+    default: Date.now,
+  },
+  orderedOn: {
+    type: Date,
   },
 
 });

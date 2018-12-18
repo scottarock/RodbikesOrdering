@@ -23,11 +23,6 @@ const routes: Routes = [
         pathMatch: 'full',
         component: fromItems.ItemNewComponent,
       },
-      {
-        path: 'hybrid',
-        pathMatch: 'full',
-        component: fromItems.ItemHybridComponent,
-      }
     ]
   },
 ];

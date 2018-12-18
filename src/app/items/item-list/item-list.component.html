@@ -1,3 +1,8 @@
+<app-item-new
+  *ngIf="showForm"
+  (newItem)="itemAdded($event)"
+></app-item-new>
+<button (click)="onToggleForm()">{{ buttonLabel }}</button>
 <table>
   <thead>
     <tr>

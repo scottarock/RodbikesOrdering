@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { Item } from '../../models';
@@ -11,6 +11,7 @@ import { ItemService } from '../../services';
 })
 export class ItemNewComponent implements OnInit {
 
+  @Output() newItem: EventEmitter<Item> = new EventEmitter();
   item: Item = new Item();
 
   constructor(
@@ -23,11 +24,10 @@ export class ItemNewComponent implements OnInit {
   onSubmit(form: NgForm) {
     this.itemService.addItem(this.item)
       .subscribe(
-        item => {
-          console.log('item added', item);
-          form.reset();
+        addedItem => {
+          this.newItem.emit(addedItem);
           this.item = new Item();
-          console.log('item reset', this.item);
+          form.reset(this.item);
         },
         error => {
           console.log(error);

@@ -1,18 +1,18 @@
-const Item = require('mongoose').model('Item');
+const Vendor = require('mongoose').model('Vendor');
 
 module.exports = {
 
-  // need to add populate() to get order and vendor data
+  // need to add populate() to get orders
 
   index(request, response) {
-    Item.find({})
-      .then( items => response.json(items) )
+    Vendor.find({})
+      .then( vendors => response.json(vendors) )
       .catch( console.log );
   },
 
   create(request, response) {
-    Item.create(request.body)
-      .then( item => response.json(item) )
+    Vendor.create(request.body)
+      .then( vendor => response.json(vendor) )
       .catch( error => {
         // assuming mongoose validation errors
         response
@@ -22,14 +22,14 @@ module.exports = {
   },
 
   show(request, response) {
-    Item.findById(request.params.itemId)
-      .then( item => response.json(item) )
+    Vendor.findById(request.params.vendorId)
+      .then( vendor => response.json(vendor) )
       .catch( console.log );
   },
 
   update(request, response) {
-    Item.findByIdAndUpdate(request.params.itemId, { $set: request.body }, { new: true })
-      .then( item => response.json(item) )
+    Vendor.findByIdAndUpdate(request.params.vendorId, { $set: request.body }, { new: true })
+      .then( item => response.json(vendor) )
       .catch( error => {
         // assuming mongoose validation errors
         response
@@ -39,9 +39,9 @@ module.exports = {
   },
 
   delete(request, response) {
-    Item.findByIdAndRemove(request.params.itemId)
-      .then( item => response.json(item) )
+    Vendor.findByIdAndRemove(request.params.vendorId)
+      .then( vendor => response.json(vendor) )
       .catch( console.log );
-  },
+  }
 
 }
