@@ -1,28 +1,28 @@
-<fieldset>
+<fieldset class="padded">
   <h3>Add an Item</h3>
   <form (submit)="onSubmit(form)" #form="ngForm">
     <div>
 
-      <div class="one-third padded">
+      <div>
+        <label class="one-sixth label-left" for="description">
+          Description
+        </label>
+        <input
+        class="five-sixths"
+        type="text"
+        id="description"
+        name="description"
+        required
+        [(ngModel)]="item.description"
+        >
+      </div>
+      <div class="one-third">
         <div>
-          <label class="one-third label-left" for="description">
-            Description
-          </label>
-          <input
-            class="two-thirds"
-            type="text"
-            id="description"
-            name="description"
-            required
-            [(ngModel)]="item.description"
-          >
-        </div>
-        <div>
-          <label class="one-third label-left" for="quantity">
+          <label class="one-half label-left" for="quantity">
             Quantity
           </label>
           <input
-            class="two-thirds"
+            class="one-half"
             type="number"
             id="quantity"
             name="quantity"
@@ -32,11 +32,11 @@
           >
         </div>
         <div>
-          <label class="one-third label-left" for="requestedBy">
+          <label class="one-half label-left" for="requestedBy">
             Requested By
           </label>
           <input
-            class="two-thirds"
+            class="one-half"
             type="text"
             id="requestedBy"
             name="requestedBy"
@@ -45,11 +45,11 @@
           >
         </div>
         <div>
-          <label class="one-third label-left" for="department">
+          <label class="one-half label-left" for="department">
             Department
           </label>
           <select
-            class="two-thirds"
+            class="one-half"
             type="text"
             id="department"
             name="department"
@@ -65,7 +65,7 @@
         </div>
       </div>
 
-      <div class="one-third padded">
+      <div class="one-third">
         <div>
           <label class="one-third label-left" for="vendor">
             Vendor
@@ -116,9 +116,9 @@
         </div>
       </div>
 
-      <div class="one-third padded">
+      <div class="one-third">
         <div>
-          <label class="one-third label-left" for="specialOrder">
+          <label class="label-left" for="specialOrder">
             Special Order
           </label>
           <input

@@ -21,6 +21,10 @@ export class ItemService {
     return this.http.post<Item>(this.base, item);
   }
 
+  updateItem(item: Item): Observable<Item> {
+    return this.http.post<Item>(`${this.base}/${item._id}`, item);
+  }
+
   deleteItem(item: Item): Observable<Item> {
     return this.http.delete<Item>(`${this.base}/${item._id}`);
   }

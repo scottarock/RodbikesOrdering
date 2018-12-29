@@ -1,8 +1,16 @@
+<app-item-detail
+  class="modal"
+  [ngStyle]="{'display': modalDisplay}"
+  [item]="selectedItem"
+  (click)="closeModal($event)"
+  (closeModal)="closeModal($event)"
+>
+</app-item-detail>
 <app-item-new
   *ngIf="showForm"
   (newItem)="itemAdded($event)"
 ></app-item-new>
-<button (click)="onToggleForm()">{{ buttonLabel }}</button>
+<button class="spaced" (click)="onToggleForm()">{{ buttonLabel }}</button>
 <table>
   <thead>
     <tr>
@@ -14,8 +22,8 @@
   </thead>
   <tbody>
     <tr *ngFor="let item of items">
-      <td>{{ item.quantity }}</td>
-      <td>{{ item.description }}</td>
+      <td class="centered">{{ item.quantity }}</td>
+      <td><span class="link" (click)="itemDetail(item)">{{ item.description }}</span></td>
       <td>{{ item.vendor }}</td>
       <td><button (click)="onDelete(item)">Delete</button></td>
     </tr>

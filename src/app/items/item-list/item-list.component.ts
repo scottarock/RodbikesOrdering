@@ -11,8 +11,10 @@ import { ItemService } from '../../services';
 export class ItemListComponent implements OnInit {
 
   items: Item[] = [];
+  selectedItem: Item = null;
   buttonLabel: string = 'Add Items';
   showForm: boolean = false;
+  modalDisplay: string = 'none';
 
   constructor(private itemService: ItemService) { }
 
@@ -36,9 +38,22 @@ export class ItemListComponent implements OnInit {
       });
   }
 
-  onToggleForm() {
+  onToggleForm(): void {
     this.buttonLabel = this.buttonLabel === 'Add Items' ? 'Done Adding' : 'Add Items';
     this.showForm = !this.showForm;
+  }
+
+  itemDetail(item: Item): void {
+    this.selectedItem = item;
+    this.modalDisplay = 'block';
+  }
+
+  closeModal(event: Event): void {
+    if ( event ) {
+      event.stopPropagation();
+    }
+    this.modalDisplay = 'none';
+    this.selectedItem = null;
   }
 
 }
