@@ -5,7 +5,8 @@ module.exports = {
   // need to add populate() to get order and vendor data
 
   index(request, response) {
-    Item.find({})
+    // use the query object to find items requested
+    Item.find(request.query)
       .then( items => response.json(items) )
       .catch( console.log );
   },

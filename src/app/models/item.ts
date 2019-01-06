@@ -2,32 +2,38 @@ export class Item {
 
   _id: string;
   description: string;
-  quantity: number;
+  quantity: string;
   requestedBy: string;
   department: string;
-  vendor: string;
-  partNumber: string;
-  cost: number;
-  price: number;
-  shipping: number = 0;
   specialOrder: string = 'No';
   customer: string;
+  vendorName: string;
+  partNumber: string;
+  cost: string;
+  price: string;
+  shipping: string;
   status: string = 'Wanted';
   requestedOn: Date;
   orderedOn: Date;
 
   constructor() { }
 
-  code(): number {
-    return this.costWithShipping() * .00053;
-  }
-
   extendedCost(): number {
-    return this.cost * this.quantity;
+    return (this.cost && this.quantity)
+      ? parseFloat(this.cost) * parseFloat(this.quantity)
+      : null;
   }
 
   costWithShipping(): number {
-    return this.cost + this.shipping;
+    return (this.cost && this.shipping)
+      ? parseFloat(this.cost) + parseFloat(this.shipping)
+      : null;
+  }
+
+  code(): number {
+    return this.costWithShipping()
+      ? Math.round(this.costWithShipping() * 53)
+      : null;
   }
 
 }

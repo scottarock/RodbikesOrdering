@@ -29,20 +29,6 @@ const itemSchema = new Schema({
       'Frame'
     ]
   },
-  vendor: {
-    type: String,
-    trim: true,
-  },
-  partNumber: {
-    type: String,
-    trim: true,
-  },
-  cost: {
-    type: Number,
-  },
-  price: {
-    type: Number,
-  },
   specialOrder: {
     type: String,
     trim: true,
@@ -56,6 +42,24 @@ const itemSchema = new Schema({
     type: String,
     trim: true,
   },
+  vendorName: {
+    type: String,
+    trim: true,
+  },
+  partNumber: {
+    type: String,
+    trim: true,
+  },
+  cost: {
+    type: Number,
+  },
+  price: {
+    type: Number,
+  },
+  shipping: {
+    type: Number,
+    default: 0,
+  },
   status: {
     type: String,
     trim: true,
@@ -64,9 +68,10 @@ const itemSchema = new Schema({
       'Wanted',
       'Pending',
       'Ordered',
+      'Back Ordered',
       'Received',
       'Not Available'
-    ]
+    ],
   },
   requestedOn: {
     type: Date,

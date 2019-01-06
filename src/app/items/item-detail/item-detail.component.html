@@ -1,6 +1,8 @@
-
 <div class="modal-content" (click)="modalClicked($event)">
-  <span class="close-modal" (click)="closeClicked()">&times;</span>
+  <span
+    class="close-modal"
+    (click)="closeClicked()">&times;
+  </span>
   <fieldset class="padded">
     <h3>View/Edit Item</h3>
     <form #form="ngForm">
@@ -19,13 +21,14 @@
           [(ngModel)]="item.description"
           >
         </div>
-        <div class="one-third">
+
+        <div class="one-half">
           <div>
-            <label class="one-half label-left" for="quantity">
+            <label class="one-third label-left" for="quantity">
               Quantity
             </label>
             <input
-              class="one-half"
+              class="two-thirds"
               type="number"
               id="quantity"
               name="quantity"
@@ -35,11 +38,11 @@
             >
           </div>
           <div>
-            <label class="one-half label-left" for="requestedBy">
+            <label class="one-third label-left" for="requestedBy">
               Requested By
             </label>
             <input
-              class="one-half"
+              class="two-thirds"
               type="text"
               id="requestedBy"
               name="requestedBy"
@@ -48,11 +51,11 @@
             >
           </div>
           <div>
-            <label class="one-half label-left" for="department">
+            <label class="one-third label-left" for="department">
               Department
             </label>
             <select
-              class="one-half"
+              class="two-thirds"
               type="text"
               id="department"
               name="department"
@@ -66,9 +69,38 @@
               <option value="Frame">Frame</option>
             </select>
           </div>
+          <div>
+            <label class="one-third label-left" for="specialOrder">
+              Special Order
+            </label>
+            <input
+              type="radio"
+              name="specialOrder"
+              value="Yes"
+              [(ngModel)]="item.specialOrder"
+            >Yes
+            <input
+              type="radio"
+              name="specialOrder"
+              value="No"
+              [(ngModel)]="item.specialOrder"
+            >No<br>
+          </div>
+          <div>
+            <label class="one-third label-left" for="customer">
+              Customer
+            </label>
+            <input
+              class="two-thirds"
+              type="text"
+              id="customer"
+              name="customer"
+              [(ngModel)]="item.customer"
+            >
+          </div>
         </div>
 
-        <div class="one-third">
+        <div class="one-half">
           <div>
             <label class="one-third label-left" for="vendor">
               Vendor
@@ -106,6 +138,18 @@
             >
           </div>
           <div>
+            <label class="one-third label-left" for="shipping">
+              Shipping
+            </label>
+            <input
+              class="two-thirds"
+              type="text"
+              id="shipping"
+              name="shipping"
+              [(ngModel)]="item.shipping"
+            >
+          </div>
+          <div>
             <label class="one-third label-left" for="price">
               Price
             </label>
@@ -117,41 +161,33 @@
               [(ngModel)]="item.price"
             >
           </div>
-        </div>
-
-        <div class="one-third">
           <div>
-            <label class="label-left" for="specialOrder">
-              Special Order
+            <label class="one-third label-left" for="extendedCost">
+              Extended Cost
             </label>
-            <input
-              type="radio"
-              name="specialOrder"
-              value="Yes"
-              [(ngModel)]="item.specialOrder"
-            >Yes
-            <input
-              type="radio"
-              name="specialOrder"
-              value="No"
-              [(ngModel)]="item.specialOrder"
-            >No<br>
+            <div class="two-thirds spaced" id="extendedCost">
+              {{ item?.extendedCost() }}
+            </div>
           </div>
           <div>
-            <label class="one-third label-left" for="customer">
-              Customer
+            <label class="one-third label-left" for="shippedCost">
+              Shipped Cost
             </label>
-            <input
-              class="two-thirds"
-              type="text"
-              id="customer"
-              name="customer"
-              [(ngModel)]="item.customer"
-            >
+            <div class="two-thirds spaced" id="shippedCost">
+              {{ item?.costWithShipping() }}
+            </div>
+          </div>
+          <div>
+            <label class="one-third label-left" for="code">
+              Code
+            </label>
+            <div class="two-thirds spaced" id="code">
+              {{ item?.code() | number: "6.0-0" }}
+            </div>
           </div>
         </div>
-
       </div>
+
       <button
         class="one-third right"
         [disabled]="form.invalid"
@@ -159,6 +195,7 @@
       >
         Update Item
       </button>
+
     </form>
   </fieldset>
 </div>

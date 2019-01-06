@@ -17,6 +17,10 @@ export class ItemService {
     return this.http.get<Item[]>(this.base);
   }
 
+  getWantedItems(): Observable<Item[]> {
+    return this.http.get<Item[]>(`${this.base}?status=Wanted`);
+  }
+
   addItem(item: Item): Observable<Item> {
     return this.http.post<Item>(this.base, item);
   }
