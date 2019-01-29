@@ -14,18 +14,18 @@ export class ItemNewComponent implements OnInit {
   @Output() newItem: EventEmitter<Item> = new EventEmitter();
   item: Item = new Item();
 
-  constructor(
-    private itemService: ItemService,
-  ) { }
+  constructor(private itemService: ItemService) { }
 
   ngOnInit() {
   }
 
-  onSubmit(form: NgForm) {
+  onSubmit(form: NgForm): void {
     this.itemService.addItem(this.item)
       .subscribe(
         addedItem => {
-          this.newItem.emit(addedItem);
+          let tempItem = new Item();
+          // transform item from generic Object to Item object and emit
+          this.newItem.emit(Object.assign(tempItem, addedItem));
           this.item = new Item();
           form.reset(this.item);
         },

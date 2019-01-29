@@ -32,7 +32,7 @@ const vendorSchema = new Schema({
     trim: true,
     validate: {
       validator: function(value) {
-        return validator.isEmail(value);
+        return ( !value || validator.isEmail(value) );
       },
       message: mail => `"${mail.value}" is not a valid email`,
     }
@@ -56,6 +56,6 @@ const vendorSchema = new Schema({
 
 });
 
-vendorSchema.plugin(uniqueValidator, { message: 'There is a {PATH} with that value already.' });
+vendorSchema.plugin(uniqueValidator, { message: 'A vendor with that name already exists.' });
 
 module.exports = mongoose.model('Vendor', vendorSchema);

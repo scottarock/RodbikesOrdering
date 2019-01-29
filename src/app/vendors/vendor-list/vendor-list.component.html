@@ -1,0 +1,26 @@
+<app-vendor-detail
+  class="modal"
+  [ngStyle]="{'display': modalDisplay}"
+  [vendor]="selectedVendor"
+  (click)="closeModal($event)"
+  (closeModal)="closeModal($event)"
+>
+</app-vendor-detail>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Phone</th>
+      <th>Web Site</th>
+      <th>Signon</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let vendor of vendors">
+      <td><span class="link" (click)="vendorDetail(vendor)">{{ vendor.name }}</span></td>
+      <td>{{ vendor.phone }}</td>
+      <td>{{ vendor.webAddress }}</td>
+      <td>{{ vendor.webSignon }} - {{ vendor.webPassword }}</td>
+    </tr>
+  </tbody>
+</table>

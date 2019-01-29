@@ -38,7 +38,7 @@ fieldset {
   border-radius: 3px;
 }
 
-input, select{
+input, select, textarea{
   width: 100%;
   margin-bottom: 10px;
   padding: 2px 4px;
@@ -123,6 +123,10 @@ th, tr:nth-child(even) {
   display: inline-block;
   vertical-align: top;
   width: 84%;
+}
+
+.four-lines {
+  height: 96px;
 }
 
 .padded {

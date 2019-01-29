@@ -1,10 +1,12 @@
 <div class="modal-content" (click)="modalClicked($event)">
   <span
     class="close-modal"
-    (click)="closeClicked()">&times;
+    (click)="closeClicked()"
+  >
+    &times;
   </span>
   <fieldset class="padded">
-    <h3>View/Edit Item</h3>
+    <h3 class="spaced">View/Edit Item</h3>
     <form #form="ngForm">
       <div *ngIf="item">
 
@@ -131,7 +133,7 @@
             </label>
             <input
               class="two-thirds"
-              type="text"
+              type="number"
               id="cost"
               name="cost"
               [(ngModel)]="item.cost"
@@ -143,7 +145,7 @@
             </label>
             <input
               class="two-thirds"
-              type="text"
+              type="number"
               id="shipping"
               name="shipping"
               [(ngModel)]="item.shipping"
@@ -155,7 +157,7 @@
             </label>
             <input
               class="two-thirds"
-              type="text"
+              type="number"
               id="price"
               name="price"
               [(ngModel)]="item.price"

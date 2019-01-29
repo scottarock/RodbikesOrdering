@@ -1,7 +1,6 @@
 <fieldset class="padded">
-  <h3>Add an Item</h3>
+  <h3 class="spaced">Add an Item</h3>
   <form (submit)="onSubmit(form)" #form="ngForm">
-    <div>
 
       <div>
         <label class="one-sixth label-left" for="description">
@@ -96,7 +95,7 @@
           </label>
           <input
             class="two-thirds"
-            type="text"
+            type="number"
             id="cost"
             name="cost"
             [(ngModel)]="item.cost"
@@ -108,7 +107,7 @@
           </label>
           <input
             class="two-thirds"
-            type="text"
+            type="number"
             id="price"
             name="price"
             [(ngModel)]="item.price"
@@ -148,7 +147,6 @@
         </div>
       </div>
 
-    </div>
     <button class="one-third right" [disabled]="form.invalid">Add Item</button>
   </form>
 </fieldset>

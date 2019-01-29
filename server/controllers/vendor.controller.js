@@ -29,7 +29,7 @@ module.exports = {
 
   update(request, response) {
     Vendor.findByIdAndUpdate(request.params.vendorId, { $set: request.body }, { new: true })
-      .then( item => response.json(vendor) )
+      .then( vendor => response.json(vendor) )
       .catch( error => {
         // assuming mongoose validation errors
         response

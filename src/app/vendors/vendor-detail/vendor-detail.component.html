@@ -1,0 +1,132 @@
+<div class="modal-content" (click)="modalClicked($event)">
+  <span
+    class="close-modal"
+    (click)="closeClicked()"
+  >
+    &times;
+  </span>
+  <fieldset class="padded">
+    <h3 class="spaced">View/Edit Vendor</h3>
+    <form #form="ngForm">
+      <div *ngIf="vendor">
+
+        <!-- first column -->
+        <div class="one-half">
+          <label class="one-third label-left" for="name">
+            Name
+          </label>
+          <input
+            class="two-thirds"
+            type="text"
+            id=name
+            name="name"
+            required
+            [(ngModel)]="vendor.name"
+          >
+          <label class="one-third label-left" for="accountNum">
+            Account Number
+          </label>
+          <input
+            class="two-thirds"
+            type="text"
+            id="acccountNum"
+            name="accountNum"
+            [(ngModel)]="vendor.accountNum"
+          >
+          <label class="one-third label-left" for="address">
+            Address
+          </label>
+          <textarea
+            class="two-thirds four-lines"
+            id=address
+            name="address"
+            [(ngModel)]="vendor.address"
+          ></textarea>
+          <label class="one-third label-left" for="phone">
+            Phone
+          </label>
+          <input
+            class="two-thirds"
+            type="text"
+            id="phone"
+            name="phone"
+            [(ngModel)]="vendor.phone"
+          >
+          <label class="one-third label-left" for="contact">
+            Contact
+          </label>
+          <input
+            class="two-thirds"
+            type="text"
+            id="contact"
+            name="contact"
+            [(ngModel)]="vendor.contact"
+          >
+          <label class="one-third label-left" for="email">
+            Email
+          </label>
+          <input
+            class="two-thirds"
+            type="text"
+            id="email"
+            name="email"
+            [(ngModel)]="vendor.email"
+          >
+        </div>
+
+        <!-- second column -->
+        <div class="one-half">
+          <label class="one-third label-left" for="webAddress">
+            Web Address
+          </label>
+          <input
+          class="two-thirds"
+          type="text"
+          id="webAddress"
+          name="webAddress"
+          [(ngModel)]="vendor.webAddress"
+          >
+          <label class="one-third label-left" for="webSignon">
+            Sign On
+          </label>
+          <input
+          class="two-thirds"
+          type="text"
+          id="webSignon"
+          name="webSignon"
+          [(ngModel)]="vendor.webSignon"
+          >
+          <label class="one-third label-left" for="webPassword">
+            Password
+          </label>
+          <input
+          class="two-thirds"
+          type="text"
+          id="webPassword"
+          name="webPassword"
+          [(ngModel)]="vendor.webPassword"
+          >
+          <label class="one-third label-left" for="notes">
+            Notes
+          </label>
+          <textarea
+            class="two-thirds four-lines"
+            id=notes
+            name="notes"
+            [(ngModel)]="vendor.notes"
+          ></textarea>
+        </div>
+
+      </div>
+
+      <button
+        class="one-third right"
+        [disabled]="form.invalid"
+        (click)="updateClicked()"
+      >
+        Update Vendor
+      </button>
+
+    </form>
+  </fieldset>
+</div>
