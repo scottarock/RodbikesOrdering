@@ -25,10 +25,9 @@ export class ItemListComponent implements OnInit {
 
   ngOnInit() {
     // get the wanted items from the database
-    this.itemService.getWantedItems()
+    this.itemService.getItems({ status: 'Wanted' })
       .subscribe(
         items => {
-          // transform items from generic Object to Item object
           const itemList = [];
           items.map(item => {
             let newItem = new Item();

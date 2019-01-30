@@ -13,13 +13,25 @@ export class ItemService {
 
   constructor(private http: HttpClient) { }
 
-  // TODO: Make one get that uses an object parameter with the find criteria
-  // to get items in all circumstances
-  getItems(): Observable<Item[]> {
-    return this.http.get<Item[]>(this.base);
+  // call server to get Items that exactly match the getParms object
+  getItems(getParms: Object): Observable<Item[]> {
+    let getString = this.createGetString(getParms);
+    if ( getString ) {
+      return this.http.get<Item[]>(`${this.base}?${getString}`);
+    } else {
+      return this.http.get<Item[]>(this.base);
+    }
   }
-  getWantedItems(): Observable<Item[]> {
-    return this.http.get<Item[]>(`${this.base}?status=Wanted`);
+
+  // call server to get Items that are like the findParms object
+  // TODO: make searching work!!!
+  findItems(findParms: Object): Observable<Item[]> {
+    let findString = this.createFindString(findParms);
+    if ( findString ) {
+      return this.http.get<Item[]>(`${this.base}?${findString}`);
+    } else {
+      return this.http.get<Item[]>(this.base);
+    }
   }
 
   // call server to create a new Item in database
@@ -35,6 +47,22 @@ export class ItemService {
   // call server to delete an Item from database
   deleteItem(item: Item): Observable<Item> {
     return this.http.delete<Item>(`${this.base}/${item._id}`);
+  }
+
+  private createGetString(searchParms: Object): string {
+    let searchString = '';
+    Object.keys(searchParms)
+      .filter(key => searchParms[key])
+      .forEach(key => searchString += `${key}=${searchParms[key]}`);
+    return searchString;
+  }
+
+  private createFindString(searchParms: Object): string {
+    let searchString = '';
+    Object.keys(searchParms)
+      .filter(key => searchParms[key])
+      .forEach(key => searchString += `${key}=/${searchParms[key]}/i`);
+    return searchString;
   }
 
 }
