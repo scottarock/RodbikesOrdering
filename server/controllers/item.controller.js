@@ -5,6 +5,11 @@ module.exports = {
   // need to add populate() to get order and vendor data
 
   index(request, response) {
+    // turn the query strings into regular expressions to find based on partials
+    if ( request.query ) {
+      Object.keys(request.query)
+        .forEach(key => request.query[key] = new RegExp(request.query[key], 'i'));
+    }
     // use the query object to find items requested
     Item.find(request.query)
       .then( items => response.json(items) )

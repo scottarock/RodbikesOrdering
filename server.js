@@ -11,6 +11,7 @@ app
   .use(parser.urlencoded({ extended: true }))
   .use(parser.json())
   .use(function(request, response, next) {
+      // basic middleware to log request in the server
       console.log(`${request.method} request coming in for ${request.url}`);
       next();
     })
