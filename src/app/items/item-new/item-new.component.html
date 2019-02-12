@@ -7,12 +7,13 @@
           Description
         </label>
         <input
-        class="five-sixths"
-        type="text"
-        id="description"
-        name="description"
-        required
-        [(ngModel)]="item.description"
+          class="five-sixths"
+          type="text"
+          id="description"
+          name="description"
+          required
+          [(ngModel)]="item.description"
+          autocomplete="off"
         >
       </div>
       <div class="one-third">
@@ -28,6 +29,7 @@
             min=1
             required
             [(ngModel)]="item.quantity"
+            autocomplete="off"
           >
         </div>
         <div>
@@ -41,6 +43,7 @@
             name="requestedBy"
             required
             [(ngModel)]="item.requestedBy"
+            autocomplete="off"
           >
         </div>
         <div>
@@ -54,6 +57,7 @@
             name="department"
             required
             [(ngModel)]="item.department"
+            autocomplete="off"
           >
             <option value="R+E">R+E</option>
             <option value="SBR">SBR</option>
@@ -66,16 +70,23 @@
 
       <div class="one-third">
         <div>
-          <label class="one-third label-left" for="vendor">
+          <label class="one-third label-left" for="vendorName">
             Vendor
           </label>
           <input
             class="two-thirds"
             type="text"
-            id="vendor"
-            name="vendor"
-            [(ngModel)]="item.vendor"
+            id="vendorName"
+            name="vendorName"
+            [(ngModel)]="item.vendorName"
+            list="vendors"
+            autocomplete="off"
           >
+          <datalist id="vendors">
+            <option *ngFor="let vendor of vendorList">
+              {{ vendor }}
+            </option>
+          </datalist>
         </div>
         <div>
           <label class="one-third label-left" for="partNumber">
@@ -87,6 +98,7 @@
             id="partNumber"
             name="partNumber"
             [(ngModel)]="item.partNumber"
+            autocomplete="off"
           >
         </div>
         <div>
@@ -99,6 +111,7 @@
             id="cost"
             name="cost"
             [(ngModel)]="item.cost"
+            autocomplete="off"
           >
         </div>
         <div>
@@ -111,6 +124,7 @@
             id="price"
             name="price"
             [(ngModel)]="item.price"
+            autocomplete="off"
           >
         </div>
       </div>
@@ -143,6 +157,7 @@
             id="customer"
             name="customer"
             [(ngModel)]="item.customer"
+            autocomplete="off"
           >
         </div>
       </div>

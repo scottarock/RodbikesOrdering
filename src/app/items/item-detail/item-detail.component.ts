@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { Item } from '../../models';
-import { ItemService } from '../../services';
+import { ItemService, VendorService } from '../../services';
 
 @Component({
   selector: 'app-item-detail',
@@ -12,10 +12,24 @@ export class ItemDetailComponent implements OnInit {
 
   @Input() item: Item;
   @Output() closeModal: EventEmitter<void> = new EventEmitter();
+  vendorList: string[] = [];
 
-  constructor(private itemService: ItemService) { }
+  constructor(
+    private itemService: ItemService,
+    private vendorService: VendorService
+  ) { }
 
   ngOnInit() {
+    this.vendorService.getVendors()
+      .subscribe(
+        vendors => {
+          this.vendorList = vendors.map(vendor => vendor.name);
+          this.vendorList.sort();
+        },
+        error => {
+          console.log(error);
+        }
+      )
   }
 
   modalClicked(event: Event): void {

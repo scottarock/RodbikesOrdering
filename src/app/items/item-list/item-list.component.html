@@ -24,7 +24,7 @@
     <tr *ngFor="let item of items">
       <td class="centered">{{ item.quantity }}</td>
       <td><span class="link" (click)="itemDetail(item)">{{ item.description }}</span></td>
-      <td>{{ item.vendor }}</td>
+      <td>{{ item.vendorName }}</td>
       <td><button (click)="onDelete(item)">Delete</button></td>
     </tr>
   </tbody>

@@ -23,6 +23,25 @@ export class OrderService {
     }
   }
 
+  // call server to create a new Order in database
+  createOrder(order: Order): Observable<Order> {
+    return this.httpClient.post<Order>(this.base, order);
+  }
+
+  // call server to update an Order in database
+  updateOrder(order: Order): Observable<Order> {
+    return this.httpClient.post<Order>(`${this.base}/${order._id}`, order);
+  }
+
+  // call server to delete an Order from database
+  deleteOrder(order: Order): Observable<Order> {
+    return this.httpClient.delete<Order>(`${this.base}/${order._id}`);
+  }
+
+  // TODO: create a helper module with this code in it
+  // currently duplicated in item.service.ts
+  // parse the parms object (conforms to Order) to create
+  // query for the html request
   private createFindString(searchParms: Object): string {
     let searchString = '';
     Object.keys(searchParms)

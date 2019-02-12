@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { Item } from '../../models';
-import { ItemService } from '../../services';
+import { ItemService, VendorService } from '../../services';
 
 @Component({
   selector: 'app-item-new',
@@ -13,10 +13,24 @@ export class ItemNewComponent implements OnInit {
 
   @Output() newItem: EventEmitter<Item> = new EventEmitter();
   item: Item = new Item();
+  vendorList: string[] = [];
 
-  constructor(private itemService: ItemService) { }
+  constructor(
+    private itemService: ItemService,
+    private vendorService: VendorService
+  ) { }
 
   ngOnInit() {
+    this.vendorService.getVendors()
+      .subscribe(
+        vendors => {
+          this.vendorList = vendors.map(vendor => vendor.name);
+          this.vendorList.sort();
+        },
+        error => {
+          console.log(error);
+        }
+      );
   }
 
   onSubmit(form: NgForm): void {

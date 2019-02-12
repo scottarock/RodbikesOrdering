@@ -38,6 +38,10 @@ export class ItemService {
     return this.http.delete<Item>(`${this.base}/${item._id}`);
   }
 
+  // TODO: create a helper module with this code in it
+  // currently duplicated in order.service.ts
+  // parse the parms object (conforms to Item) to create
+  // query for the html request
   private createFindString(searchParms: Object): string {
     let searchString = '';
     Object.keys(searchParms)

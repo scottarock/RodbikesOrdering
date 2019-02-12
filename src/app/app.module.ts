@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import * as fromHome from './home';
 import * as fromItems from './items';
 import * as fromVendors from './vendors';
+import * as fromOrders from './orders';
 
 import { PriceCodePipe } from './price-code.pipe';
 
@@ -18,6 +19,7 @@ import { PriceCodePipe } from './price-code.pipe';
     ...fromHome.components,
     ...fromItems.components,
     ...fromVendors.components,
+    ...fromOrders.components,
     PriceCodePipe,
   ],
   imports: [

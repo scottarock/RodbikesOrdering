@@ -22,6 +22,7 @@
             name="name"
             required
             [(ngModel)]="vendor.name"
+            autocomplete="off"
           >
           <label class="one-third label-left" for="accountNum">
             Account Number
@@ -32,6 +33,7 @@
             id="acccountNum"
             name="accountNum"
             [(ngModel)]="vendor.accountNum"
+            autocomplete="off"
           >
           <label class="one-third label-left" for="address">
             Address
@@ -51,6 +53,7 @@
             id="phone"
             name="phone"
             [(ngModel)]="vendor.phone"
+            autocomplete="off"
           >
           <label class="one-third label-left" for="contact">
             Contact
@@ -61,6 +64,7 @@
             id="contact"
             name="contact"
             [(ngModel)]="vendor.contact"
+            autocomplete="off"
           >
           <label class="one-third label-left" for="email">
             Email
@@ -71,6 +75,7 @@
             id="email"
             name="email"
             [(ngModel)]="vendor.email"
+            autocomplete="off"
           >
         </div>
 
@@ -80,31 +85,34 @@
             Web Address
           </label>
           <input
-          class="two-thirds"
-          type="text"
-          id="webAddress"
-          name="webAddress"
-          [(ngModel)]="vendor.webAddress"
+            class="two-thirds"
+            type="text"
+            id="webAddress"
+            name="webAddress"
+            [(ngModel)]="vendor.webAddress"
+            autocomplete="off"
           >
           <label class="one-third label-left" for="webSignon">
             Sign On
           </label>
           <input
-          class="two-thirds"
-          type="text"
-          id="webSignon"
-          name="webSignon"
-          [(ngModel)]="vendor.webSignon"
+            class="two-thirds"
+            type="text"
+            id="webSignon"
+            name="webSignon"
+            [(ngModel)]="vendor.webSignon"
+            autocomplete="off"
           >
           <label class="one-third label-left" for="webPassword">
             Password
           </label>
           <input
-          class="two-thirds"
-          type="text"
-          id="webPassword"
-          name="webPassword"
-          [(ngModel)]="vendor.webPassword"
+            class="two-thirds"
+            type="text"
+            id="webPassword"
+            name="webPassword"
+            [(ngModel)]="vendor.webPassword"
+            autocomplete="off"
           >
           <label class="one-third label-left" for="notes">
             Notes

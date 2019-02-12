@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import * as fromHome from './home';
 import * as fromItems from './items';
 import * as fromVendors from './vendors';
+import * as fromOrders from './orders';
 
 const routes: Routes = [
   {
@@ -39,6 +40,21 @@ const routes: Routes = [
         pathMatch: 'full',
         component: fromVendors.VendorNewComponent,
       },
+    ],
+  },
+  {
+    path: 'orders',
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        component: fromOrders.OrderListComponent,
+      },
+      {
+        path: 'new',
+        pathMatch: 'full',
+        component: fromOrders.OrderNewComponent,
+      }
     ],
   },
 ];
