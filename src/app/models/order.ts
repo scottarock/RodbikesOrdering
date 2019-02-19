@@ -1,3 +1,5 @@
+import { Item } from './item';
+
 export class Order {
 
   _id: string;
@@ -7,6 +9,7 @@ export class Order {
   orderNumber: string;
   shippingCost: number;
   notes: string;
+  items: Item[];
 
   constructor() { }
 

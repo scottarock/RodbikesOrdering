@@ -29,6 +29,12 @@ const orderSchema = new Schema({
     type: String,
     trim: true,
   },
+  items: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Item',
+    }
+  ]
 
 });
 

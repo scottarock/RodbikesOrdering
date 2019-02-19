@@ -15,6 +15,7 @@ export class Item {
   status: string = 'Wanted';
   requestedOn: Date;
   orderedOn: Date;
+  poNumber: number = 0;
 
   constructor() { }
 

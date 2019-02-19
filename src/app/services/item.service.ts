@@ -46,8 +46,29 @@ export class ItemService {
     let searchString = '';
     Object.keys(searchParms)
       .filter(key => searchParms[key])
-      .forEach(key => searchString += `${key}=${searchParms[key]}`);
+      .forEach(key =>
+        {
+          searchParms[key] = this.replaceSpecialCharacters(searchParms[key]);
+          searchString
+            ? searchString += `&${key}=${searchParms[key]}`
+            : searchString = `${key}=${searchParms[key]}`
+        }
+      );
     return searchString;
+  }
+
+  private replaceSpecialCharacters(parm: string): string {
+    const replaceChars = {
+      '&' : '%26',
+      '+' : '%2B',
+    };
+    let tempParm: string = parm;
+    Object.keys(replaceChars).forEach( specialChar => {
+      while (tempParm.includes(specialChar)) {
+        tempParm = tempParm.replace(specialChar, replaceChars[specialChar]);
+      }
+    });
+    return tempParm;
   }
 
 }

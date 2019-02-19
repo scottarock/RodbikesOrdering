@@ -148,6 +148,10 @@ th, tr:nth-child(even) {
   float: right;
 }
 
+.centered {
+  text-align: center;
+}
+
 /* styling classes */
 .ng-untouched[required], .ng-valid[required] {
   border-left: 5px solid blue;
@@ -166,10 +170,6 @@ th, tr:nth-child(even) {
 
 .link:hover {
   cursor: pointer;
-}
-
-.centered {
-  text-align: center;
 }
 
 /* clases for modal displays */

@@ -28,6 +28,7 @@ export class ItemListComponent implements OnInit {
     this.itemService.getItems({ status: 'Wanted' })
       .subscribe(
         items => {
+          // convert generic Objects into Item objects
           const itemList = [];
           items.map(item => {
             let newItem = new Item();

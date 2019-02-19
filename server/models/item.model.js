@@ -80,6 +80,10 @@ const itemSchema = new Schema({
   orderedOn: {
     type: Date,
   },
+  poNumber: {
+    type: Number,
+    default: 0,
+  },
 
 });
 

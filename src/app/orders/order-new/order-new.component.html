@@ -1,3 +1,24 @@
-<p>
-  order-new works!
-</p>
+<fieldset class="padded">
+  <h3 class="spaced">Choose Vendor for Order</h3>
+  <form (submit)="onStartOrder()" #form="ngForm">
+
+    <div>
+      <label class="one-third label-left" for="vendor">Vendor</label>
+      <select
+        class="one-half"
+        type="text"
+        name="vendor"
+        id="vendor"
+        required
+        [(ngModel)]="vendorName"
+        autocomplete="off"
+      >
+        <option *ngFor="let vendor of vendorList" value="{{ vendor }}">
+          {{ vendor }}
+        </option>
+      </select>
+      <button [disabled]="form.invalid">Start Order</button>
+    </div>
+
+  </form>
+</fieldset>
