@@ -51,6 +51,11 @@ input[type="radio"] {
   width:auto;
 }
 
+td input {
+  width:85%;
+  margin: 2%;
+}
+
 button {
   width: 100%;
   padding: 4px 0px;

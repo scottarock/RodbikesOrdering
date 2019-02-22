@@ -1,3 +1,67 @@
-<p>
-  order-detail works!
-</p>
+<fieldset class="padded">
+  <form (submit)="onOrderComplete">
+    <h3 class="spaced">Place Order</h3>
+    <p class="one-half spaced">Vendor - {{ order.vendorName }}</p>
+    <p class="one-half spaced">PO Number - TBD</p>
+    <label for="shippingCost" class="one-third label-left">Shipping Cost</label>
+    <input
+      class="two-thirds"
+      type="number"
+      name="shippingCost"
+      id="shippingCost"
+      [(ngModel)]="order.shippingCost"
+      autocomplete="off"
+    >
+    <button class="one-third right spaced">Order Complete</button>
+  </form>
+<table>
+  <colgroup>
+    <col style="width:8%">
+    <col style="width:44%">
+    <col style="width:24%">
+    <col style="width:12%">
+    <col style="width:12%">
+  </colgroup>
+  <thead>
+    <tr>
+      <th>Qty</th>
+      <th>Description</th>
+      <th>Part Number</th>
+      <th>Cost</th>
+      <th>Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of order.items">
+      <td class="centered">
+        <input
+          type="number"
+          name="quantity"
+          [(ngModel)]="item.quantity"
+        >
+      </td>
+      <td>{{ item.description }}</td>
+      <td>
+        <input
+          type="text"
+          name="partNumber"
+          [(ngModel)]="item.partNumber">
+      </td>
+      <td>
+        <input
+          type="number"
+          name="cost"
+          [(ngModel)]="item.cost"
+        >
+      </td>
+      <td>
+        <input
+          type="number"
+          name="price"
+          [(ngModel)]="item.price"
+        >
+      </td>
+    </tr>
+  </tbody>
+</table>
+</fieldset>

@@ -1,4 +1,4 @@
-<fieldset class="padded">
+<fieldset class="padded" *ngIf="!showOrder">
   <h3 class="spaced">Choose Vendor for Order</h3>
   <form (submit)="onStartOrder()" #form="ngForm">
 
@@ -22,3 +22,9 @@
 
   </form>
 </fieldset>
+
+<app-order-detail
+  *ngIf="showOrder"
+  [order]="newOrder"
+>
+</app-order-detail>

@@ -38,10 +38,13 @@ export class OrderService {
     return this.httpClient.delete<Order>(`${this.base}/${order._id}`);
   }
 
-  // TODO: create a helper module with this code in it
-  // currently duplicated in item.service.ts
-  // parse the parms object (conforms to Order) to create
-  // query for the html request
+//******************************************************************************
+// TODO: create a helper module with this code in it
+// currently duplicated in item.service.ts
+
+// parse the parms object (conforms to Order) to create
+// query for the html request
+
   private createFindString(searchParms: Object): string {
     let searchString = '';
     Object.keys(searchParms)
@@ -71,5 +74,7 @@ export class OrderService {
     });
     return tempParm;
   }
+
+//******************************************************************************
 
 }

@@ -10,9 +10,14 @@ import { OrderService, ItemService } from '../../services';
 })
 export class OrderNewComponent implements OnInit {
 
+  // the new order to place
+  newOrder: Order = new Order();
+  // the list of vendor names that have items on the want list
   vendorList: Set<string>;
+  // the name of the vendor to order from
   vendorName: string = "";
-  order: Order = new Order();
+  // flag to determine when to show the order
+  showOrder: boolean = false;
 
   constructor(
     private orderService: OrderService,
@@ -33,7 +38,7 @@ export class OrderNewComponent implements OnInit {
   }
 
   onStartOrder() {
-    this.itemService.getItems({ poNumber: 0, vendorName: this.vendorName })
+    this.itemService.getItems({ status: 'Wanted', vendorName: this.vendorName })
       .subscribe(
         items => {
           const itemList = [];
@@ -41,8 +46,9 @@ export class OrderNewComponent implements OnInit {
             let newItem = new Item;
             itemList.push(Object.assign(newItem, item));
           });
-          this.order.items = itemList;
-          this.order.vendorName = this.vendorName;
+          this.newOrder.items = itemList;
+          this.newOrder.vendorName = this.vendorName;
+          this.showOrder = true;
         },
         error => {
           console.log(error);

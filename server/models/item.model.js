@@ -82,7 +82,7 @@ const itemSchema = new Schema({
   },
   poNumber: {
     type: Number,
-    default: 0,
+    default: -1,
   },
 
 });
