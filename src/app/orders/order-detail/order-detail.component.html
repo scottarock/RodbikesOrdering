@@ -1,67 +1,163 @@
 <fieldset class="padded">
-  <form (submit)="onOrderComplete">
-    <h3 class="spaced">Place Order</h3>
-    <p class="one-half spaced">Vendor - {{ order.vendorName }}</p>
-    <p class="one-half spaced">PO Number - TBD</p>
-    <label for="shippingCost" class="one-third label-left">Shipping Cost</label>
-    <input
-      class="two-thirds"
-      type="number"
-      name="shippingCost"
-      id="shippingCost"
-      [(ngModel)]="order.shippingCost"
-      autocomplete="off"
-    >
-    <button class="one-third right spaced">Order Complete</button>
+  <form (submit)="onOrderComplete()">
+    <h3 class="spaced">PO Number - TBD</h3>
+    <div class="spaced">
+      <p class="spaced">Vendor - {{ order.vendorName }}</p>
+
+      <div class="one-half">
+        <p>
+          <span class="one-third label-left">Account Number</span>
+          {{ vendor?.accountNum }}
+        </p>
+        <p>
+          <span class="one-third label-left">Address</span>
+          {{ vendor?.address }}
+        </p>
+        <p>
+          <span class="one-third label-left">Phone</span>
+          {{ vendor?.phone }}
+        </p>
+        <p>
+          <span class="one-third label-left">Contact</span>
+          {{ vendor?.contact }}
+        </p>
+        <p>
+          <span class="one-third label-left">Email</span>
+          {{ vendor?.email }}
+        </p>
+      </div>
+
+      <div class="one-half">
+        <p>
+          <span class="one-third label-left">Web Address</span>
+          {{ vendor?.webAddress }}
+        </p>
+        <p>
+          <span class="one-third label-left">Sign On</span>
+          {{ vendor?.webSignon }}
+        </p>
+        <p>
+          <span class="one-third label-left">Password</span>
+          {{ vendor?.webPassword }}
+        </p>
+        <p>
+          <span class="one-third label-left">Notes</span>
+          {{ vendor?.notes }}
+        </p>
+      </div>
+
+    </div>
+
+    <div class="one-half">
+      <label
+        for="dateOrdered"
+        class="one-third label-left"
+      >
+        Date Ordered
+      </label>
+      <input
+        class="two-thirds"
+        type="date"
+        name="dateOrdered"
+        id="dateOrdered"
+        [(ngModel)]="order.dateOrdered"
+        autocomplete="off"
+      >
+      <label
+        for="orderNumber"
+        class="one-third label-left"
+      >
+        Order Number
+      </label>
+      <input
+        class="two-thirds"
+        type="text"
+        name="orderNumber"
+        id="orderNumber"
+        [(ngModel)]="order.orderNumber"
+        autocomplete="off"
+      >
+      <label
+        for="shippingCost"
+        class="one-third label-left"
+      >
+        Shipping Cost
+      </label>
+      <input
+        class="two-thirds"
+        type="number"
+        name="shippingCost"
+        id="shippingCost"
+        [(ngModel)]="order.shippingCost"
+        autocomplete="off"
+      >
+    </div>
+
+    <div class="one-half">
+      <label
+        for="notes"
+        class="one-third label-left"
+      >
+        Notes
+      </label>
+      <textarea
+        class="two-thirds four-lines"
+        name="notes"
+        id="notes"
+        [(ngModel)]="order.notes"
+      ></textarea>
+    </div>
+
+    <button class="spaced">Order Complete</button>
   </form>
-<table>
-  <colgroup>
-    <col style="width:8%">
-    <col style="width:44%">
-    <col style="width:24%">
-    <col style="width:12%">
-    <col style="width:12%">
-  </colgroup>
-  <thead>
-    <tr>
-      <th>Qty</th>
-      <th>Description</th>
-      <th>Part Number</th>
-      <th>Cost</th>
-      <th>Price</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let item of order.items">
-      <td class="centered">
-        <input
-          type="number"
-          name="quantity"
-          [(ngModel)]="item.quantity"
-        >
-      </td>
-      <td>{{ item.description }}</td>
-      <td>
-        <input
-          type="text"
-          name="partNumber"
-          [(ngModel)]="item.partNumber">
-      </td>
-      <td>
-        <input
-          type="number"
-          name="cost"
-          [(ngModel)]="item.cost"
-        >
-      </td>
-      <td>
-        <input
-          type="number"
-          name="price"
-          [(ngModel)]="item.price"
-        >
-      </td>
-    </tr>
-  </tbody>
-</table>
+  <table>
+    <colgroup>
+      <col style="width:8%">
+      <col style="width:44%">
+      <col style="width:24%">
+      <col style="width:12%">
+      <col style="width:12%">
+    </colgroup>
+    <thead>
+      <tr>
+        <th>Qty</th>
+        <th>Description</th>
+        <th>Part Number</th>
+        <th>Cost</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of order.items">
+        <td class="centered">
+          <input
+            type="number"
+            name="quantity"
+            [(ngModel)]="item.quantity"
+          >
+        </td>
+        <td>{{ item.description }}</td>
+        <td>
+          <input
+            type="text"
+            name="partNumber"
+            [(ngModel)]="item.partNumber">
+        </td>
+        <td>
+          <input
+            type="number"
+            name="cost"
+            [(ngModel)]="item.cost"
+          >
+        </td>
+        <td>
+          <input
+            type="number"
+            name="price"
+            [(ngModel)]="item.price"
+          >
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </fieldset>

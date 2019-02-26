@@ -14,7 +14,7 @@ export class OrderService {
   constructor(private httpClient: HttpClient) { }
 
   // call server to get Orders that match the getParms object
-  getOrders(findParms: Object): Observable<Order[]> {
+  getOrders(findParms: Object = {}): Observable<Order[]> {
     let findString = this.createFindString(findParms);
     if ( findString ) {
       return this.httpClient.get<Order[]>(`${this.base}?${findString}`);
@@ -40,7 +40,7 @@ export class OrderService {
 
 //******************************************************************************
 // TODO: create a helper module with this code in it
-// currently duplicated in item.service.ts
+// currently duplicated in item.service.ts and vendor.service.ts
 
 // parse the parms object (conforms to Order) to create
 // query for the html request

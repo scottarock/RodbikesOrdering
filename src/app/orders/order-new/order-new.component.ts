@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Order, Item } from '../../models';
-import { OrderService, ItemService } from '../../services';
+import { ItemService } from '../../services';
 
 @Component({
   selector: 'app-order-new',
@@ -20,7 +20,6 @@ export class OrderNewComponent implements OnInit {
   showOrder: boolean = false;
 
   constructor(
-    private orderService: OrderService,
     private itemService: ItemService
   ) { }
 

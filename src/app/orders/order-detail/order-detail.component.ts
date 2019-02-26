@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
-import { Order } from '../../models';
+import { Order, Vendor } from '../../models';
+import { OrderService, VendorService } from '../../services';
 
 @Component({
   selector: 'app-order-detail',
@@ -10,10 +12,43 @@ import { Order } from '../../models';
 export class OrderDetailComponent implements OnInit {
 
   @Input() order: Order;
+  vendor: Vendor = new Vendor;
 
-  constructor() { }
+  constructor(
+    private orderService: OrderService,
+    private vendorService: VendorService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
+    this.vendorService.getVendors({ name: this.order.vendorName })
+      .subscribe(
+        vendors => {
+          vendors.forEach(vendor => {
+            if ( this.order.vendorName === vendor.name ) {
+              Object.assign(this.vendor, vendor);
+            }
+          })
+        },
+        error => {
+          console.log(error);
+        }
+      )
+  }
+
+  onOrderComplete() {
+    console.log('Completed Order', this.order);
+    // TODO: NEED TO ADD THE PO NUMBER BEFORE SAVING
+    // this.orderService.createOrder(this.order)
+    //   .subscribe(
+    //     order => {
+    //       this.order = order;
+    //       this.router.navigateByUrl('/');
+    //     },
+    //     error => {
+    //       console.log(error);
+    //     }
+    //   );
   }
 
 }

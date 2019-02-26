@@ -39,6 +39,7 @@ fieldset {
 }
 
 input, select, textarea{
+  box-sizing: border-box;
   width: 100%;
   margin-bottom: 10px;
   padding: 2px 4px;
@@ -52,7 +53,7 @@ input[type="radio"] {
 }
 
 td input {
-  width:85%;
+  width:96%;
   margin: 2%;
 }
 
