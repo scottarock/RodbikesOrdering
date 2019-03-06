@@ -21,7 +21,10 @@ export class VendorListComponent implements OnInit {
 
   ngOnInit() {
     // get the vendors from the database
-    this.vendorService.getVendors()
+    const query = {
+      sort: 'name',
+    };
+    this.vendorService.getVendors(query)
       .subscribe(
         vendors => {
           // transform vendors from generic Object to Vendor object

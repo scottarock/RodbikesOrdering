@@ -21,10 +21,14 @@ export class OrderDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.vendorService.getVendors({ name: this.order.vendorName })
+    const query = {
+      name: this.order.vendorName,
+    };
+    this.vendorService.getVendors(query)
       .subscribe(
         vendors => {
           vendors.forEach(vendor => {
+            // name is unique, so this should return a single vendor
             if ( this.order.vendorName === vendor.name ) {
               Object.assign(this.vendor, vendor);
             }

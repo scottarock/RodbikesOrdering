@@ -20,11 +20,14 @@ export class ItemDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.vendorService.getVendors()
+    const query = {
+      sort: 'name',
+      fields: 'name',
+    };
+    this.vendorService.getVendors(query)
       .subscribe(
         vendors => {
           this.vendorList = vendors.map(vendor => vendor.name);
-          this.vendorList.sort();
         },
         error => {
           console.log(error);

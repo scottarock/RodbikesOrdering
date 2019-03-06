@@ -25,21 +25,14 @@ export class OrderNewComponent implements OnInit {
 
   ngOnInit() {
     // get the list of vendors that have items on the want list
-    this.itemService.getItems({ status: 'Wanted' })
+    const query = {
+      status: 'Wanted',
+      sort: 'vendorName',
+      fields: 'vendorName',
+    };
+    this.itemService.getItems(query)
       .subscribe(
         items => {
-          // sort items by vendor names
-          items.sort((a,b) => {
-            let aVendorName = a.vendorName.toLowerCase();
-            let bVendorName = b.vendorName.toLowerCase();
-            if ( aVendorName < bVendorName ) {
-              return -1;
-            }
-            if ( aVendorName > bVendorName ) {
-              return 1;
-            }
-            return 0;
-          });
           // turn the array into a set of just the vendor names
           this.vendorList = new Set(items.map( item => item.vendorName ));
         },
@@ -51,7 +44,11 @@ export class OrderNewComponent implements OnInit {
 
   onStartOrder() {
     // retrieve all the items that are marked as wanted for the chosen vendor
-    this.itemService.getItems({ status: 'Wanted', vendorName: this.vendorName })
+    const query = {
+      status: 'Wanted',
+      vendorName: this.vendorName,
+    };
+    this.itemService.getItems(query)
       .subscribe(
         items => {
           const itemList = [];

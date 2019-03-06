@@ -1,11 +1,14 @@
 const Vendor = require('mongoose').model('Vendor');
+const queryParams = require('api-query-params');
 
 module.exports = {
 
-  // need to add populate() to get orders
-
   index(request, response) {
-    Vendor.find({})
+    // get any query parameters from the api request
+    const { filter, sort, projection } = queryParams(request.query);
+    Vendor.find(filter)
+      .sort(sort)
+      .select(projection)
       .then( vendors => response.json(vendors) )
       .catch( console.log );
   },

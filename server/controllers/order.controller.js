@@ -1,10 +1,15 @@
 const Order = require('mongoose').model('Order');
+const queryParams = require('api-query-params');
 
 module.exports = {
 
   index(request, response) {
+    // get any query parameters from the api request
+    const { filter, sort, projection } = queryParams(request.query);
     // use the query object to find orders requested
     Order.find(request.query)
+      .sort(sort)
+      .select(projection)
       .then( orders => response.json(orders) )
       .catch( console.log );
   },

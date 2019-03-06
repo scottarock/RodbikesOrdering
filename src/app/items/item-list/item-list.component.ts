@@ -25,7 +25,10 @@ export class ItemListComponent implements OnInit {
 
   ngOnInit() {
     // get the wanted items from the database
-    this.itemService.getItems({ status: 'Wanted' })
+    const query = {
+      status: 'Wanted,Pended,Not Available',
+    };
+    this.itemService.getItems(query)
       .subscribe(
         items => {
           // convert generic Objects into Item objects
