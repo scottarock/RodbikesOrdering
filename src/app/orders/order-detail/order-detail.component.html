@@ -1,7 +1,8 @@
 <fieldset class="padded">
   <form (submit)="onOrderComplete()">
-    <h3 class="spaced">PO Number - TBD</h3>
-    <div class="spaced">
+    <h3 class="spaced">PO Number - {{ order.poNumber }}</h3>
+
+    <fieldset class="padded spaced">
       <p class="spaced">Vendor - {{ order.vendorName }}</p>
 
       <div class="one-half">
@@ -46,7 +47,7 @@
         </p>
       </div>
 
-    </div>
+    </fieldset>
 
     <div class="one-half">
       <label

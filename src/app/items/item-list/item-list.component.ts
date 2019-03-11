@@ -27,12 +27,13 @@ export class ItemListComponent implements OnInit {
     // get the wanted items from the database
     const query = {
       status: 'Wanted,Pended,Not Available',
+      sort: 'vendorName',
     };
     this.itemService.getItems(query)
       .subscribe(
         items => {
           // convert generic Objects into Item objects
-          const itemList = [];
+          const itemList: Item[] = [];
           items.map(item => {
             let newItem = new Item();
             itemList.push(Object.assign(newItem, item));
@@ -47,6 +48,7 @@ export class ItemListComponent implements OnInit {
   }
 
   itemAdded(item: Item): void {
+    // TODO: add in sorted order
     // add item from item new component to the item list
     this.items.push(item);
   }

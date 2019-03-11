@@ -5,12 +5,16 @@ module.exports = {
 
   index(request, response) {
     // get any query parameters from the api request
-    const { filter, sort, projection } = queryParams(request.query);
+    const { filter, skip, limit, sort, projection } = queryParams(request.query);
     // use the query object to find orders requested
-    Order.find(request.query)
+    Order.find(filter)
       .sort(sort)
+      .skip(skip)
+      .limit(limit)
       .select(projection)
-      .then( orders => response.json(orders) )
+      .then( orders => {
+        response.json(orders)
+      } )
       .catch( console.log );
   },
 

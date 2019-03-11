@@ -88,6 +88,10 @@ th, tr:nth-child(even) {
   background-color: silver;
 }
 
+hr {
+  margin: 8px 0px;
+}
+
 /* sizing and position classes */
 .one-sixth {
   box-sizing: border-box;

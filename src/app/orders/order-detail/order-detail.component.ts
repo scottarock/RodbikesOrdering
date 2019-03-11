@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Order, Vendor } from '../../models';
-import { OrderService, VendorService } from '../../services';
+import { Order, Vendor, Item } from '../../models';
+import { OrderService, VendorService, ItemService } from '../../services';
 
 @Component({
   selector: 'app-order-detail',
@@ -17,10 +17,12 @@ export class OrderDetailComponent implements OnInit {
   constructor(
     private orderService: OrderService,
     private vendorService: VendorService,
+    private itemService: ItemService,
     private router: Router
   ) { }
 
   ngOnInit() {
+    // retrieve the actual vendor for the order
     const query = {
       name: this.order.vendorName,
     };
@@ -37,22 +39,20 @@ export class OrderDetailComponent implements OnInit {
         error => {
           console.log(error);
         }
-      )
+      );
   }
 
   onOrderComplete() {
     console.log('Completed Order', this.order);
-    // TODO: NEED TO ADD THE PO NUMBER BEFORE SAVING
-    // this.orderService.createOrder(this.order)
-    //   .subscribe(
-    //     order => {
-    //       this.order = order;
-    //       this.router.navigateByUrl('/');
-    //     },
-    //     error => {
-    //       console.log(error);
-    //     }
-    //   );
+    this.orderService.updateOrder(this.order)
+      .subscribe(
+        () => {
+          this.router.navigateByUrl('/');
+        },
+        error => {
+          console.log(error);
+        }
+      );
   }
 
 }

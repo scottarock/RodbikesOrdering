@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { mergeMap } from 'rxjs/operators';
+import { forkJoin } from 'rxjs';
 
 import { Order, Item } from '../../models';
-import { ItemService } from '../../services';
+import { OrderService, ItemService } from '../../services';
 
 @Component({
   selector: 'app-order-new',
@@ -16,11 +18,12 @@ export class OrderNewComponent implements OnInit {
   vendorList: Set<string>;
   // the name of the vendor to order from
   vendorName: string = "";
-  // flag to determine when to show the order
+  // flag to determine when to show the new order details
   showOrder: boolean = false;
 
   constructor(
-    private itemService: ItemService
+    private orderService: OrderService,
+    private itemService: ItemService,
   ) { }
 
   ngOnInit() {
@@ -43,29 +46,58 @@ export class OrderNewComponent implements OnInit {
   }
 
   onStartOrder() {
-    // retrieve all the items that are marked as wanted for the chosen vendor
-    const query = {
+    // set up the queries to retrieve data for the new order
+    const poNumberQuery = {
+      sort: '-poNumber',
+      limit: 1,
+      fields: 'poNumber',
+    };
+    const itemQuery = {
       status: 'Wanted',
       vendorName: this.vendorName,
     };
-    this.itemService.getItems(query)
+
+    // assign vendor name for a valid order
+    this.order.vendorName = this.vendorName;
+
+    forkJoin(
+      // figure out the po number and create order
+      this.orderService.getOrders(poNumberQuery)
+        .pipe(
+          mergeMap( orders => {
+            if ( orders.length ) {
+              this.order.poNumber = orders[0].poNumber + 1;
+            } else {
+              this.order.poNumber = 100;
+            }
+            return this.orderService.createOrder(this.order);
+          })
+        ),
+      // get the items for the order
+      this.itemService.getItems(itemQuery),
+    )
       .subscribe(
-        items => {
-          const itemList = [];
-          // change all the generic Object items into actual Item objects
+        // take the results and set up order for detail component
+        results => {
+          let [ order, items ] = results;
+          const itemList: Item[] = [];
+
+          // turn generic items into Item objects
           items.map(item => {
-            let newItem = new Item;
-            itemList.push(Object.assign(newItem, item));
+            let newItem: Item = new Item();
+            itemList.push(Object.assign(new Item(), item));
           });
-          // assign the vendor and items to the new order and show ordering form
-          this.order.vendorName = this.vendorName;
+
+          this.order = order;
           this.order.items = itemList;
-          this.showOrder = true;
         },
         error => {
-          console.log(error);
+          console.log('error caught', error);
         }
-      )
+      );
+
+    // show the order details
+    this.showOrder = true;
   }
 
 }
