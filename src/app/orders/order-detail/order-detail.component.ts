@@ -22,6 +22,7 @@ export class OrderDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log(this.order.dateOrdered.toDateString());
     // retrieve the actual vendor for the order
     const query = {
       name: this.order.vendorName,
@@ -44,10 +45,15 @@ export class OrderDetailComponent implements OnInit {
 
   onOrderComplete() {
     console.log('Completed Order', this.order);
+    this.order.items.forEach( item => {
+      item.status = 'Ordered';
+      item.poNumber = this.order.poNumber;
+      item.orderedOn = new Date();
+    });
     this.orderService.updateOrder(this.order)
       .subscribe(
         () => {
-          this.router.navigateByUrl('/');
+          this.router.navigateByUrl('/items');
         },
         error => {
           console.log(error);

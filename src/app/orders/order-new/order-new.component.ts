@@ -59,6 +59,7 @@ export class OrderNewComponent implements OnInit {
 
     // assign vendor name for a valid order
     this.order.vendorName = this.vendorName;
+    this.order.dateOrdered = new Date();
 
     forkJoin(
       // figure out the po number and create order
@@ -84,7 +85,6 @@ export class OrderNewComponent implements OnInit {
 
           // turn generic items into Item objects
           items.map(item => {
-            let newItem: Item = new Item();
             itemList.push(Object.assign(new Item(), item));
           });
 
