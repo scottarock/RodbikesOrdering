@@ -145,25 +145,14 @@
               Cost
             </label>
             <input
-              class="two-thirds"
-              type="number"
+              class="one-third right-text"
+              type="text"
               id="cost"
               name="cost"
-              [(ngModel)]="item.cost"
+              [ngModel]="item.cost | currency: symbol"
+              (blur)="onCurrencyChange(cost)"
               autocomplete="off"
-            >
-          </div>
-          <div>
-            <label class="one-third label-left" for="shipping">
-              Shipping
-            </label>
-            <input
-              class="two-thirds"
-              type="number"
-              id="shipping"
-              name="shipping"
-              [(ngModel)]="item.shipping"
-              autocomplete="off"
+              #cost
             >
           </div>
           <div>
@@ -171,38 +160,52 @@
               Price
             </label>
             <input
-              class="two-thirds"
-              type="number"
+              class="one-third right-text"
+              type="text"
               id="price"
               name="price"
-              [(ngModel)]="item.price"
+              [ngModel]="item.price | currency: symbol"
+              (blur)="onCurrencyChange(price)"
               autocomplete="off"
+              #price
             >
           </div>
-          <div>
-            <label class="one-third label-left" for="extendedCost">
-              Extended Cost
-            </label>
-            <div class="two-thirds spaced" id="extendedCost">
-              {{ item?.extendedCost() }}
+
+          <div class="two-thirds right">
+            <div class="spaced">
+              <label class="one-half label-left" for="shipping">
+                Shipping per Item -
+              </label>
+              <div class="one-half">
+                {{ item?.shipping | currency: symbol }}
+              </div>
+            </div>
+            <div class="spaced">
+              <label class="one-half label-left" for="extendedCost">
+                Extended Cost -
+              </label>
+              <div class="one-half" id="extendedCost">
+                {{ item?.extendedCost() | currency: symbol }}
+              </div>
+            </div>
+            <div class="spaced">
+              <label class="one-half label-left" for="shippedCost">
+                Shipped Cost -
+              </label>
+              <div class="one-half" id="shippedCost">
+                {{ item?.costWithShipping() | currency: symbol }}
+              </div>
+            </div>
+            <div class="spaced">
+              <label class="one-half label-left" for="code">
+                Code -
+              </label>
+              <div class="one-half" id="code">
+                {{ item?.code() | number: "6.0-0" }}
+              </div>
             </div>
           </div>
-          <div>
-            <label class="one-third label-left" for="shippedCost">
-              Shipped Cost
-            </label>
-            <div class="two-thirds spaced" id="shippedCost">
-              {{ item?.costWithShipping() }}
-            </div>
-          </div>
-          <div>
-            <label class="one-third label-left" for="code">
-              Code
-            </label>
-            <div class="two-thirds spaced" id="code">
-              {{ item?.code() | number: "6.0-0" }}
-            </div>
-          </div>
+
         </div>
       </div>
 

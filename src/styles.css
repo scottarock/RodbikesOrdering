@@ -158,8 +158,12 @@ hr {
   float: right;
 }
 
-.centered {
+.center-text {
   text-align: center;
+}
+
+.right-text {
+  text-align: right;
 }
 
 /* styling classes */

@@ -56,4 +56,12 @@ export class ItemDetailComponent implements OnInit {
     )
   }
 
+  onCurrencyChange(input: any): void {
+    let newValue = input.value;
+    if (newValue[0] === '$') {
+      newValue = newValue.slice(1);
+    }
+    this.item[input.name] = parseFloat(newValue);
+  }
+
 }

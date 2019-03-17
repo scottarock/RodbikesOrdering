@@ -52,13 +52,27 @@ export class OrderDetailComponent implements OnInit {
     });
     this.orderService.updateOrder(this.order)
       .subscribe(
-        () => {
+        order => {
+          console.log(order);
           this.router.navigateByUrl('/items');
         },
         error => {
           console.log(error);
         }
       );
+  }
+
+  onCurrencyChange(input: any, currencyObject: (Item | Order) ): void {
+    let newValue = input.value;
+    if (newValue[0] === '$') {
+      newValue = newValue.slice(1);
+    }
+    currencyObject[input.name] = parseFloat(newValue);
+  }
+
+  onDateChange(input: any): void {
+    let newDate = input.value;
+    this.order[input.name] = new Date(newDate);
   }
 
 }

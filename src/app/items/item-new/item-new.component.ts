@@ -37,6 +37,14 @@ export class ItemNewComponent implements OnInit {
       );
   }
 
+  onCurrencyChange(input: any): void {
+    let newValue = input.value;
+    if (newValue[0] === '$') {
+      newValue = newValue.slice(1);
+    }
+    this.item[input.name] = parseFloat(newValue);
+  }
+
   onSubmit(form: NgForm): void {
     this.itemService.addItem(this.item)
       .subscribe(

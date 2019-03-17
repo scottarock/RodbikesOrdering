@@ -106,26 +106,36 @@
             Cost
           </label>
           <input
-            class="two-thirds"
-            type="number"
+            class="one-third right-text"
+            type="text"
             id="cost"
             name="cost"
-            [(ngModel)]="item.cost"
+            [ngModel]="item.cost | currency: symbol"
+            (blur)="onCurrencyChange(cost)"
             autocomplete="off"
+            #cost
           >
+          <span class="one-third centered">
+            {{ item.cost | currency: symbol }}
+          </span>
         </div>
         <div>
           <label class="one-third label-left" for="price">
             Price
           </label>
           <input
-            class="two-thirds"
-            type="number"
+            class="one-third right-text"
+            type="text"
             id="price"
             name="price"
-            [(ngModel)]="item.price"
+            [ngModel]="item.price | currency: symbol"
+            (blur)=onCurrencyChange(price)
             autocomplete="off"
+            #price
           >
+          <span class="one-third centered">
+            {{ item.price | currency: symbol }}
+          </span>
         </div>
       </div>
 

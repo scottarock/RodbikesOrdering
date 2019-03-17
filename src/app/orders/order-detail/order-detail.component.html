@@ -61,8 +61,11 @@
         type="date"
         name="dateOrdered"
         id="dateOrdered"
-        [(ngModel)]="order.dateOrdered"
+        [ngModel]="order.dateOrdered | date: 'yyyy-MM-dd'"
+        (blur)="onDateChange(dateOrdered)"
         autocomplete="off"
+        required
+        #dateOrdered
       >
       <label
         for="orderNumber"
@@ -85,12 +88,14 @@
         Shipping Cost
       </label>
       <input
-        class="two-thirds"
-        type="number"
+        class="one-third"
+        type="text"
         name="shippingCost"
         id="shippingCost"
-        [(ngModel)]="order.shippingCost"
+        [ngModel]="order.shippingCost | currency: symbol"
+        (blur)="onCurrencyChange(shippingCost, order)"
         autocomplete="off"
+        #shippingCost
       >
     </div>
 
@@ -130,7 +135,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let item of order.items">
-        <td class="centered">
+        <td class="center-text">
           <input
             type="number"
             name="quantity"
@@ -146,16 +151,22 @@
         </td>
         <td>
           <input
-            type="number"
+            class="right-text"
+            type="text"
             name="cost"
-            [(ngModel)]="item.cost"
+            [ngModel]="item.cost | currency: symbol"
+            (blur)="onCurrencyChange(cost, item)"
+            #cost
           >
         </td>
         <td>
           <input
-            type="number"
+            class="right-text"
+            type="text"
             name="price"
-            [(ngModel)]="item.price"
+            [ngModel]="item.price | currency: symbol"
+            (blur)="onCurrencyChange(price, item)"
+            #price
           >
         </td>
       </tr>
