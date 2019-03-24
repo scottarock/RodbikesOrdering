@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-import { Item } from '../../models';
+import { Item, Order } from '../../models';
 import { ItemService, VendorService } from '../../services';
 
 @Component({
@@ -37,12 +37,12 @@ export class ItemNewComponent implements OnInit {
       );
   }
 
-  onCurrencyChange(input: any): void {
+  onCurrencyChange(input: any, currencyObject: Item | Order): void {
     let newValue = input.value;
     if (newValue[0] === '$') {
       newValue = newValue.slice(1);
     }
-    this.item[input.name] = parseFloat(newValue);
+    currencyObject[input.name] = parseFloat(newValue);
   }
 
   onSubmit(form: NgForm): void {

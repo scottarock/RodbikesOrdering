@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { Item } from '../../models';
+import { Item, Order } from '../../models';
 import { ItemService, VendorService } from '../../services';
 
 @Component({
@@ -56,12 +56,12 @@ export class ItemDetailComponent implements OnInit {
     )
   }
 
-  onCurrencyChange(input: any): void {
+  onCurrencyChange(input: any, currencyObject: Item | Order ): void {
     let newValue = input.value;
     if (newValue[0] === '$') {
       newValue = newValue.slice(1);
     }
-    this.item[input.name] = parseFloat(newValue);
+    currencyObject[input.name] = parseFloat(newValue);
   }
 
 }

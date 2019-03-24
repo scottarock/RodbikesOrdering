@@ -49,6 +49,7 @@ export class OrderDetailComponent implements OnInit {
       item.status = 'Ordered';
       item.poNumber = this.order.poNumber;
       item.orderedOn = new Date();
+      this.itemService.updateItem(item).subscribe();
     });
     this.orderService.updateOrder(this.order)
       .subscribe(

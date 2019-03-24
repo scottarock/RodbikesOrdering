@@ -150,7 +150,7 @@
               id="cost"
               name="cost"
               [ngModel]="item.cost | currency: symbol"
-              (blur)="onCurrencyChange(cost)"
+              (blur)="onCurrencyChange(cost, item)"
               autocomplete="off"
               #cost
             >
@@ -165,7 +165,7 @@
               id="price"
               name="price"
               [ngModel]="item.price | currency: symbol"
-              (blur)="onCurrencyChange(price)"
+              (blur)="onCurrencyChange(price, item)"
               autocomplete="off"
               #price
             >

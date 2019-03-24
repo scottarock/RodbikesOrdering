@@ -4,7 +4,7 @@ const queryParams = require('api-query-params');
 module.exports = {
 
   index(request, response) {
-    // get any query parameters from the api request
+    // get query parameters from the api request
     const { filter, skip, limit, sort, projection } = queryParams(request.query);
     // use the query object to find orders requested
     Order.find(filter)
@@ -31,8 +31,9 @@ module.exports = {
 
   show(request, response) {
     Order.findById(request.params.orderId)
+      .populate()
       .then( order => response.json(order) )
-      .carch( console.log );
+      .catch( console.log );
   },
 
   update(request, response) {
