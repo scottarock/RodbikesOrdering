@@ -21,9 +21,9 @@ const routes: Routes = [
         component: fromItems.ItemListComponent,
       },
       {
-        path: 'new',
+        path: 'find',
         pathMatch: 'full',
-        component: fromItems.ItemNewComponent,
+        component: fromItems.ItemSearchComponent,
       },
     ],
   },

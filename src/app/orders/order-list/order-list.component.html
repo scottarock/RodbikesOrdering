@@ -1,3 +1,24 @@
-<p>
-  order-list works!
-</p>
+<table>
+  <colgroup>
+    <col style="width: 15%">
+    <col style="width: 55%">
+    <col style="width: 15%">
+    <col style="width: 15%">
+  </colgroup>
+  <thead>
+    <tr>
+      <th>PO Number</th>
+      <th>Vendor</th>
+      <th>Status</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of orders">
+      <td class="center-text">{{ order.poNumber }}</td>
+      <td>{{ order.vendorName }}</td>
+      <td class="center-text">{{ order.status }}</td>
+      <td class="center-text">{{ order.dateOrdered | date: "MM/dd/yyyy" }}</td>
+    </tr>
+  </tbody>
+</table>

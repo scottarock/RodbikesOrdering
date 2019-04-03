@@ -13,13 +13,12 @@ section {
 }
 
 nav ul {
-  padding: 4px 0px;
   background-color: gainsboro;
 }
 
 nav li {
+  padding: 4px 0px;
   display: inline-block;
-  padding: 2px 8px;
   border-right: 1px solid black;
 }
 
@@ -28,8 +27,12 @@ nav li:last-child {
 }
 
 nav li a {
+  box-sizing: border-box;
+  padding: 2px 8px;
   color: black;
   text-decoration: none;
+  border: 2px solid gainsboro;
+  border-radius: 2px;
 }
 
 fieldset {
@@ -184,6 +187,12 @@ hr {
 
 .link:hover {
   cursor: pointer;
+}
+
+.active {
+  color: #024e68;
+  border: 2px solid #024e68;
+  background-color: #61b4cf;
 }
 
 /* clases for modal displays */

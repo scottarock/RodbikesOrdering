@@ -14,6 +14,17 @@ const orderSchema = new Schema({
     trim: true,
     required: [true, 'vendor name is required'],
   },
+  status: {
+    type: String,
+    trim: true,
+    default: 'Ordered',
+    enum: [
+      'Ordered',
+      'Pending',
+      'Partially Received',
+      'Fully Received'
+    ],
+  },
   dateOrdered: {
     type: Date,
   },
