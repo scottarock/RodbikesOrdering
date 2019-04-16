@@ -1,8 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { Order, Vendor, Item } from '../../models';
-import { OrderService, VendorService, ItemService } from '../../services';
+import { VendorService, ItemService } from '../../services';
+import { changeDateInput, changeCurrencyInput } from '../../shared/formatted-input-handlers';
 
 @Component({
   selector: 'app-order-detail',
@@ -12,18 +12,18 @@ import { OrderService, VendorService, ItemService } from '../../services';
 export class OrderDetailComponent implements OnInit {
 
   @Input() order: Order;
+  @Output() canLeaveOrder = new EventEmitter<boolean>();
+  @Output() orderCompleted = new EventEmitter<Order>();
+  @Output() orderCancelled = new EventEmitter<Order>();
   vendor: Vendor = new Vendor;
 
   constructor(
-    private orderService: OrderService,
     private vendorService: VendorService,
     private itemService: ItemService,
-    private router: Router
   ) { }
 
   ngOnInit() {
-    console.log(this.order.dateOrdered.toDateString());
-    // retrieve the actual vendor for the order
+    // retrieve all the vendor information for the order
     const query = {
       name: this.order.vendorName,
     };
@@ -43,37 +43,40 @@ export class OrderDetailComponent implements OnInit {
       );
   }
 
-  onOrderComplete() {
-    console.log('Completed Order', this.order);
-    this.order.items.forEach( item => {
-      item.status = 'Ordered';
-      item.poNumber = this.order.poNumber;
-      item.orderedOn = new Date();
-      this.itemService.updateItem(item).subscribe();
-    });
-    this.orderService.updateOrder(this.order)
+  completeOrder() {
+    this.orderCompleted.emit(this.order);
+  }
+
+  cancelOrder() {
+    this.orderCancelled.emit(this.order);
+  }
+
+  saveItem() {
+    console.log("Save the item now!")
+  }
+
+  onDateChange(input: any, dateObject: Order): void {
+    changeDateInput(input, dateObject);
+  };
+
+  onCurrencyChange(input: any, currencyObject: Item | Order): void {
+    changeCurrencyInput(input, currencyObject);
+    if ( currencyObject instanceof Item ) {
+      this.onSaveItem(currencyObject as Item);
+    }
+  }
+
+  onSaveItem(item: Item): void {
+    this.itemService.updateItem(item)
       .subscribe(
-        order => {
-          console.log(order);
-          this.router.navigateByUrl('/items');
+        updatedItem => {
+          console.log('item updated', updatedItem);
+
         },
         error => {
           console.log(error);
         }
       );
-  }
-
-  onCurrencyChange(input: any, currencyObject: (Item | Order) ): void {
-    let newValue = input.value;
-    if (newValue[0] === '$') {
-      newValue = newValue.slice(1);
-    }
-    currencyObject[input.name] = parseFloat(newValue);
-  }
-
-  onDateChange(input: any): void {
-    let newDate = input.value;
-    this.order[input.name] = new Date(newDate);
   }
 
 }

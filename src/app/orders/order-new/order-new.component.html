@@ -23,8 +23,12 @@
   </form>
 </fieldset>
 
+<p>{{ safeToLeave }}</p>
+
 <app-order-detail
   *ngIf="showOrder"
   [order]="order"
+  (orderCompleted)="onOrderCompleted()"
+  (orderCancelled)="onOrderCancelled()"
 >
 </app-order-detail>

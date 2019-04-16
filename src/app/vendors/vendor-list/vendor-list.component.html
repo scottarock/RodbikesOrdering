@@ -27,9 +27,13 @@
       <td>{{ vendor.phone }}</td>
       <td>{{ vendor.webAddress }}</td>
       <td>
-        {{ vendor.webSignon }}
-        <span *ngIf="vendor.webSignon">|</span>
-        {{ vendor.webPassword }}
+        <span *ngIf="vendor.webSignon">
+          Signon: {{ vendor.webSignon }}
+        </span>
+        <span *ngIf="vendor.webSignon && vendor.webPassword">-</span>
+        <span *ngIf="vendor.webPassword">
+          Password: {{ vendor.webPassword }}
+        </span>
       </td>
     </tr>
   </tbody>

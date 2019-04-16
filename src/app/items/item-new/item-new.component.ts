@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 
 import { Item, Order } from '../../models';
 import { ItemService, VendorService } from '../../services';
+import { changeCurrencyInput } from '../../shared/formatted-input-handlers';
 
 @Component({
   selector: 'app-item-new',
@@ -37,14 +38,6 @@ export class ItemNewComponent implements OnInit {
       );
   }
 
-  onCurrencyChange(input: any, currencyObject: Item | Order): void {
-    let newValue = input.value;
-    if (newValue[0] === '$') {
-      newValue = newValue.slice(1);
-    }
-    currencyObject[input.name] = parseFloat(newValue);
-  }
-
   onSubmit(form: NgForm): void {
     this.itemService.addItem(this.item)
       .subscribe(
@@ -59,6 +52,10 @@ export class ItemNewComponent implements OnInit {
           console.log(error);
         }
       );
+  }
+
+  onCurrencyChange(input: any, currencyObject: Item): void {
+    changeCurrencyInput(input, currencyObject);
   }
 
 }

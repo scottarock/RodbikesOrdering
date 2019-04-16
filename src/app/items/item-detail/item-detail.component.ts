@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { Item, Order } from '../../models';
 import { ItemService, VendorService } from '../../services';
+import { changeCurrencyInput } from '../../shared/formatted-input-handlers';
 
 @Component({
   selector: 'app-item-detail',
@@ -56,12 +57,8 @@ export class ItemDetailComponent implements OnInit {
     )
   }
 
-  onCurrencyChange(input: any, currencyObject: Item | Order ): void {
-    let newValue = input.value;
-    if (newValue[0] === '$') {
-      newValue = newValue.slice(1);
-    }
-    currencyObject[input.name] = parseFloat(newValue);
+  onCurrencyChange(input: any, currencyObject: Item ): void {
+    changeCurrencyInput(input, currencyObject);
   }
 
 }

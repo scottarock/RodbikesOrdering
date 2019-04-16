@@ -6,6 +6,8 @@ import * as fromItems from './items';
 import * as fromVendors from './vendors';
 import * as fromOrders from './orders';
 
+import { CanLeaveOrderGuard } from './can-leave-order.guard';
+
 const routes: Routes = [
   {
     path: '',
@@ -54,6 +56,7 @@ const routes: Routes = [
         path: 'new',
         pathMatch: 'full',
         component: fromOrders.OrderNewComponent,
+        canDeactivate: [CanLeaveOrderGuard],
       }
     ],
   },

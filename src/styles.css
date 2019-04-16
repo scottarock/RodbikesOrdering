@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Niramit');
 
 * {
+  box-sizing: border-box;
   margin: 0px;
   padding: 0px;
   font-family: Niramit, sans-serif;
@@ -19,7 +20,7 @@ nav ul {
 nav li {
   padding: 4px 0px;
   display: inline-block;
-  border-right: 1px solid black;
+  border-right: 2px solid dimgray;
 }
 
 nav li:last-child {
@@ -27,22 +28,18 @@ nav li:last-child {
 }
 
 nav li a {
-  box-sizing: border-box;
   padding: 2px 8px;
   color: black;
   text-decoration: none;
   border: 2px solid gainsboro;
-  border-radius: 2px;
 }
 
 fieldset {
-  box-sizing: border-box;
   border: 1px solid gray;
   border-radius: 3px;
 }
 
 input, select, textarea{
-  box-sizing: border-box;
   width: 100%;
   margin-bottom: 10px;
   padding: 2px 4px;
@@ -97,42 +94,36 @@ hr {
 
 /* sizing and position classes */
 .one-sixth {
-  box-sizing: border-box;
   display: inline-block;
   vertical-align: top;
   width: 16%;
 }
 
 .one-quarter {
-  box-sizing: border-box;
   display: inline-block;
   vertical-align: top;
   width: 25%;
 }
 
 .one-third {
-  box-sizing: border-box;
   display: inline-block;
   vertical-align: top;
   width: 33%;
 }
 
 .one-half {
-  box-sizing: border-box;
   display: inline-block;
   vertical-align: top;
   width: 50%;
 }
 
 .two-thirds {
-  box-sizing: border-box;
   display: inline-block;
   vertical-align: top;
   width: 67%;
 }
 
 .five-sixths {
-  box-sizing: border-box;
   display: inline-block;
   vertical-align: top;
   width: 84%;
@@ -190,12 +181,12 @@ hr {
 }
 
 .active {
-  color: #024e68;
-  border: 2px solid #024e68;
-  background-color: #61b4cf;
+  border: 2px solid dimgray;
+  background-color: silver;
+  text-decoration: underline;
 }
 
-/* clases for modal displays */
+/* classes for modal displays */
 /* modal background */
 .modal {
   display: none;
@@ -217,7 +208,7 @@ hr {
   margin: auto;
   padding: 20px;
   background-color: #fefefe;
-  border: 1px solid gray;
+  border: 2px solid gray;
   border-radius: 5px;
 }
 

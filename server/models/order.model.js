@@ -17,10 +17,10 @@ const orderSchema = new Schema({
   status: {
     type: String,
     trim: true,
-    default: 'Ordered',
+    default: 'Pending',
     enum: [
-      'Ordered',
       'Pending',
+      'Ordered',
       'Partially Received',
       'Fully Received'
     ],

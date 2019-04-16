@@ -5,7 +5,7 @@ export class Order {
   _id: string;
   poNumber: number;
   vendorName: string;
-  status: string = 'Ordered';
+  status: string = 'Pending';
   dateOrdered: Date;
   orderNumber: string;
   shippingCost: number;

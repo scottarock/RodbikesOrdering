@@ -1,5 +1,5 @@
 <fieldset class="padded">
-  <form (submit)="onOrderComplete()">
+  <form>
     <h3 class="spaced">PO Number - {{ order.poNumber }}</h3>
 
     <fieldset class="padded spaced">
@@ -62,7 +62,7 @@
         name="dateOrdered"
         id="dateOrdered"
         [ngModel]="order.dateOrdered | date: 'yyyy-MM-dd'"
-        (blur)="onDateChange(dateOrdered)"
+        (blur)="onDateChange(dateOrdered, order)"
         autocomplete="off"
         required
         #dateOrdered
@@ -114,7 +114,19 @@
       ></textarea>
     </div>
 
-    <button class="spaced">Order Complete</button>
+    <button
+      class="one-half spaced"
+      (click)=completeOrder()
+    >
+      Order Complete
+    </button>
+    <button
+      class="one-half spaced"
+      (click)="cancelOrder()"
+    >
+      Cancel
+    </button>
+
   </form>
   <table>
     <colgroup>
@@ -140,14 +152,26 @@
             type="number"
             name="quantity"
             [(ngModel)]="item.quantity"
+            required
+            (change)="onSaveItem(item)"
           >
         </td>
-        <td>{{ item.description }}</td>
+        <td>
+          <input
+            type="text"
+            name="description"
+            [(ngModel)]="item.description"
+            required
+            (change)="onSaveItem(item)"
+          >
+        </td>
         <td>
           <input
             type="text"
             name="partNumber"
-            [(ngModel)]="item.partNumber">
+            [(ngModel)]="item.partNumber"
+            (change)="onSaveItem(item)"
+          >
         </td>
         <td>
           <input
