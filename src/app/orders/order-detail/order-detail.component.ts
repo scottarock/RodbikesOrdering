@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { Order, Vendor, Item } from '../../models';
-import { VendorService, ItemService } from '../../services';
+import { VendorService } from '../../services';
 import { changeDateInput, changeCurrencyInput } from '../../shared/formatted-input-handlers';
 
 @Component({
@@ -12,14 +12,13 @@ import { changeDateInput, changeCurrencyInput } from '../../shared/formatted-inp
 export class OrderDetailComponent implements OnInit {
 
   @Input() order: Order;
-  @Output() canLeaveOrder = new EventEmitter<boolean>();
   @Output() orderCompleted = new EventEmitter<Order>();
   @Output() orderCancelled = new EventEmitter<Order>();
+  @Output() itemModified = new EventEmitter<Item>();
   vendor: Vendor = new Vendor;
 
   constructor(
     private vendorService: VendorService,
-    private itemService: ItemService,
   ) { }
 
   ngOnInit() {
@@ -62,21 +61,12 @@ export class OrderDetailComponent implements OnInit {
   onCurrencyChange(input: any, currencyObject: Item | Order): void {
     changeCurrencyInput(input, currencyObject);
     if ( currencyObject instanceof Item ) {
-      this.onSaveItem(currencyObject as Item);
+      this.itemModified.emit(currencyObject as Item);
     }
   }
 
   onSaveItem(item: Item): void {
-    this.itemService.updateItem(item)
-      .subscribe(
-        updatedItem => {
-          console.log('item updated', updatedItem);
-
-        },
-        error => {
-          console.log(error);
-        }
-      );
+    this.itemModified.emit(item);
   }
 
 }

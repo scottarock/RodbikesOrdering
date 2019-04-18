@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-import { Item, Order } from '../../models';
+import { Item } from '../../models';
 import { ItemService, VendorService } from '../../services';
 import { changeCurrencyInput } from '../../shared/formatted-input-handlers';
 

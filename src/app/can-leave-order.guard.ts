@@ -13,7 +13,9 @@ export class CanLeaveOrderGuard implements CanDeactivate<OrderNewComponent> {
 
   canDeactivate( component: OrderNewComponent ): Observable<boolean> | boolean {
 
-    return component.canNavigate();
+    const result = component.canNavigate();
+
+    return result;
 
   }
 

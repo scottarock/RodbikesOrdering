@@ -30,5 +30,6 @@
   [order]="order"
   (orderCompleted)="onOrderCompleted()"
   (orderCancelled)="onOrderCancelled()"
+  (itemModified)="onItemChanged($event)"
 >
 </app-order-detail>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, forkJoin, of } from 'rxjs';
-import { mergeMap, flatMap } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 
 import { Order, Item } from '../../models';
 import { OrderService, ItemService, DialogService } from '../../services';
@@ -51,7 +51,7 @@ export class OrderNewComponent implements OnInit {
       )
   }
 
-  onStartOrder() {
+  onStartOrder(): void {
     // set up the queries to retrieve data for the new order
     const poNumberQuery = { // get the order with the greatest poNumber
       sort: '-poNumber',
@@ -67,7 +67,7 @@ export class OrderNewComponent implements OnInit {
       // figure out the po number and create order
       this.orderService.getOrders(poNumberQuery)
         .pipe(
-          mergeMap( orders => {
+          switchMap( orders => {
             this.order.poNumber = orders.length ? orders[0].poNumber + 1 : 100;
             this.order.vendorName = this.vendorName;
             this.order.dateOrdered = new Date();
@@ -88,7 +88,7 @@ export class OrderNewComponent implements OnInit {
             itemList.push(Object.assign(new Item(), item));
           });
 
-          this.order = order;
+          this.order = Object.assign(new Order(), order);
           this.order.items = itemList;
         },
         error => {
@@ -101,7 +101,7 @@ export class OrderNewComponent implements OnInit {
     this.safeToLeave = false;
   }
 
-  onOrderCompleted() {
+  onOrderCompleted(): void {
     // mark items as ordered and save them to database
     this.order.items.forEach( item => {
       item.status = 'Ordered';
@@ -127,11 +127,10 @@ export class OrderNewComponent implements OnInit {
       );
   }
 
-  onOrderCancelled() {
+  onOrderCancelled(): void {
     const message = 'Cancelling this order will delete it, do you wish to procede?';
 
-    this.dialogService
-      .confirm(message)
+    this.dialogService.confirm(message)
       .subscribe( response => {
         if ( response ) {
           this.orderService.deleteOrder(this.order)
@@ -146,23 +145,48 @@ export class OrderNewComponent implements OnInit {
             )
         }
       });
-    // this.dialogService.confirm(message)
-    //   .pipe(
-    //
-    //   )
+  }
+
+  onItemChanged(item: Item): void {
+    this.itemService.updateItem(item)
+      .subscribe(
+        updatedItem => {
+          console.log('item updated', updatedItem);
+        },
+        error => {
+          console.log(error);
+        }
+      );
   }
 
   canNavigate(): Observable<boolean> {
-    // const message = 'Leaving the ordering tab will cause the order to be cancelled. Do you wish to do this?'
+    const message = 'Leaving the ordering tab will cause the order to be cancelled. Do you wish to do this?'
 
-    // if ( this.safeToLeave ) {
-    //   return of(true);
-    // }
+    if ( this.safeToLeave ) {
+      return of(true);
+    }
 
-    // return this.dialogService.confirm(message);
-
-    return of(this.safeToLeave);
-
+    return this.dialogService.confirm(message)
+      .pipe(
+        switchMap( response => {
+          if ( response ) {
+            // user response is leave page and cancel order
+            return this.orderService.deleteOrder(this.order);
+          } else {
+            // user response is to cancel navigation
+            return of(this.safeToLeave);
+          }
+        }),
+        switchMap( data => {
+          // check to see if deleteOrder was called or not
+          if ( typeof data !== 'boolean' ) {
+            // if it was called, order was deleted and we can leave
+            this.safeToLeave = true;
+          }
+          return of(this.safeToLeave);
+        })
+      );
   }
+
 
 }
