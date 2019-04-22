@@ -14,7 +14,7 @@ export class ItemListComponent implements OnInit {
   items: Item[] = [];
   // label on button to show and hide item new component
   buttonLabel: string = 'Add Items';
-  // determines visibility of the item new  component
+  // determines visibility of the item new component
   showForm: boolean = false;
   // item selected to view/edit details
   selectedItem: Item = null;

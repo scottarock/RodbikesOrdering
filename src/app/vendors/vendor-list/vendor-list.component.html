@@ -6,6 +6,11 @@
   (closeModal)="closeModal($event)"
 >
 </app-vendor-detail>
+<app-vendor-new
+  *ngIf="showForm"
+  (newVendor)="vendorAdded($event)"
+></app-vendor-new>
+<button class="spaced" (click)="onToggleForm()">{{ buttonLabel }}</button>
 <table>
   <thead>
     <tr>

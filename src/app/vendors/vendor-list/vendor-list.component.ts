@@ -12,6 +12,10 @@ export class VendorListComponent implements OnInit {
 
   // the vendors in the list
   vendors: Vendor[] = [];
+  // label on the button to show and hide vendor new component
+  buttonLabel: string = 'Add Vendor';
+  // determines visibility of the vendor new component
+  showForm: boolean = false;
   // vendor selected to view/edit details
   selectedVendor: Vendor = null;
   // value for the 'display' style of the modal vendor details component
@@ -40,6 +44,18 @@ export class VendorListComponent implements OnInit {
           console.log(error);
         }
       );
+  }
+
+  vendorAdded(vendor: Vendor): void {
+    // TODO: add in sorted order
+    // add vendor from the vendor new component to the vendor list
+    this.vendors.push(vendor);
+  }
+
+  onToggleForm(): void {
+    // view or hide the vendor new component and change button label accordingly
+    this.buttonLabel = this.buttonLabel === 'Add Vendor' ? 'Done Adding' : 'Add Vendor';
+    this.showForm = !this.showForm;
   }
 
   vendorDetail(vendor: Vendor): void {

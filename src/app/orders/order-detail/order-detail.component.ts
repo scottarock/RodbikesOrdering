@@ -46,6 +46,10 @@ export class OrderDetailComponent implements OnInit {
     this.orderCompleted.emit(this.order);
   }
 
+  pendOrder() {
+    console.log('gonna pend this order =>', this.order);
+  }
+
   cancelOrder() {
     this.orderCancelled.emit(this.order);
   }

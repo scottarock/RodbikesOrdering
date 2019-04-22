@@ -3,27 +3,34 @@
   <form (submit)="onStartOrder()" #form="ngForm">
 
     <div>
+
+      <!-- vendor name input and errors -->
       <label class="one-third label-left" for="vendor">Vendor</label>
-      <select
-        class="one-half"
-        type="text"
-        name="vendor"
-        id="vendor"
-        required
-        [(ngModel)]="vendorName"
-        autocomplete="off"
-      >
-        <option *ngFor="let vendor of vendorList" value="{{ vendor }}">
-          {{ vendor }}
-        </option>
-      </select>
+      <div class="one-half">
+        <select
+          type="text"
+          name="vendor"
+          id="vendor"
+          required
+          [(ngModel)]="vendorName"
+          autocomplete="off"
+          #vendor="ngModel"
+        >
+          <option *ngFor="let vendor of vendorList" value="{{ vendor }}">
+            {{ vendor }}
+          </option>
+        </select>
+        <div class="warning" *ngIf="vendor.touched && vendor.invalid ">
+          <p *ngIf="vendor.errors.required">
+            Vendor Name is required
+          </p>
+        </div>
+      </div>
       <button [disabled]="form.invalid">Start Order</button>
     </div>
 
   </form>
 </fieldset>
-
-<p>{{ safeToLeave }}</p>
 
 <app-order-detail
   *ngIf="showOrder"
