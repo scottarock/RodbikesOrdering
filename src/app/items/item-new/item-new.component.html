@@ -53,7 +53,9 @@
             </p>
           </div>
           <div class="warning" *ngIf="item.quantity < 1">
-            <p>Quantity should be at least 1</p>
+            <p>
+              Quantity should be at least 1
+            </p>
           </div>
         </div>
 
@@ -111,7 +113,10 @@
 
       </div>
 
+      <!-- second column -->
       <div class="one-third">
+
+        <!-- vendor input -->
         <div>
           <label class="one-third label-left" for="vendorName">
             Vendor
@@ -131,6 +136,8 @@
             </option>
           </datalist>
         </div>
+
+        <!-- part number input -->
         <div>
           <label class="one-third label-left" for="partNumber">
             Part Number
@@ -144,6 +151,8 @@
             autocomplete="off"
           >
         </div>
+
+        <!-- cost input -->
         <div>
           <label class="one-third label-left" for="cost">
             Cost
@@ -162,6 +171,8 @@
             {{ item.cost | currency: symbol }}
           </span>
         </div>
+
+        <!-- price input -->
         <div>
           <label class="one-third label-left" for="price">
             Price
@@ -182,7 +193,10 @@
         </div>
       </div>
 
+      <!-- third column -->
       <div class="one-third">
+
+        <!-- specialOrder input -->
         <div>
           <label class="label-left" for="specialOrder">
             Special Order
@@ -200,6 +214,8 @@
             [(ngModel)]="item.specialOrder"
           >No<br>
         </div>
+
+        <!-- customer input -->
         <div>
           <label class="one-third label-left" for="customer">
             Customer
@@ -213,6 +229,7 @@
             autocomplete="off"
           >
         </div>
+
       </div>
 
     <button class="one-third right" [disabled]="form.invalid">Add Item</button>

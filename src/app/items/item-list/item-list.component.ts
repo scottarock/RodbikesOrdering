@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Item } from '../../models';
-import { ItemService } from '../../services';
+import { ItemService, DialogService } from '../../services';
 
 @Component({
   selector: 'app-item-list',
@@ -21,7 +21,10 @@ export class ItemListComponent implements OnInit {
   // value for the 'display' style of the modal item details component
   modalDisplay: string = 'none';
 
-  constructor(private itemService: ItemService) { }
+  constructor(
+    private itemService: ItemService,
+    private dialogService: DialogService,
+  ) { }
 
   ngOnInit() {
     // get the wanted items from the database
@@ -54,12 +57,18 @@ export class ItemListComponent implements OnInit {
   }
 
   onDelete(item: Item): void {
-    this.itemService.deleteItem(item)
-      .subscribe( deletedItem => {
-        // remove deleted item from list
-        this.items = this.items.filter( i => {
-          return i._id !== deletedItem._id;
-        });
+    const message = 'Are you sure you want to delete this item?'
+    this.dialogService.confirm(message)
+      .subscribe( response =>
+        { if ( response ) {
+          this.itemService.deleteItem(item)
+          .subscribe( deletedItem => {
+            // remove deleted item from list
+            this.items = this.items.filter( i => {
+              return i._id !== deletedItem._id;
+            });
+          });
+        }
       });
   }
 
@@ -71,8 +80,15 @@ export class ItemListComponent implements OnInit {
 
   itemDetail(item: Item): void {
     // set the selected item and enable the modal view of item detail component
-    this.selectedItem = item;
+    this.selectedItem = Object.assign(new Item(), item);
     this.modalDisplay = 'block';
+  }
+
+  itemSaved(updatedItem: Item): void {
+    // replace the appropriate item with the updated one
+    this.items = this.items.map( item => {
+      return item._id === updatedItem._id ? updatedItem : item;
+    });
   }
 
   closeModal(event: Event): void {

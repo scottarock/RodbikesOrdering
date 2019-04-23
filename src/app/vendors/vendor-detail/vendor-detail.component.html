@@ -12,18 +12,29 @@
 
         <!-- first column -->
         <div class="one-half">
+
+          <!-- name input and errors -->
           <label class="one-third label-left" for="name">
             Name
           </label>
-          <input
-            class="two-thirds"
-            type="text"
-            id=name
-            name="name"
-            required
-            [(ngModel)]="vendor.name"
-            autocomplete="off"
-          >
+          <div class="two-thirds">
+            <input
+              type="text"
+              id=name
+              name="name"
+              required
+              [(ngModel)]="vendor.name"
+              autocomplete="off"
+              #name="ngModel"
+            >
+            <div class="warning" *ngIf="name.touched && name.invalid">
+              <p *ngIf="name.errors.required">
+                Name is required
+              </p>
+            </div>
+          </div>
+
+          <!-- accountNum input -->
           <label class="one-third label-left" for="accountNum">
             Account Number
           </label>
@@ -35,6 +46,8 @@
             [(ngModel)]="vendor.accountNum"
             autocomplete="off"
           >
+
+          <!-- address input -->
           <label class="one-third label-left" for="address">
             Address
           </label>
@@ -44,6 +57,8 @@
             name="address"
             [(ngModel)]="vendor.address"
           ></textarea>
+
+          <!-- phone input -->
           <label class="one-third label-left" for="phone">
             Phone
           </label>
@@ -55,6 +70,8 @@
             [(ngModel)]="vendor.phone"
             autocomplete="off"
           >
+
+          <!-- contact input -->
           <label class="one-third label-left" for="contact">
             Contact
           </label>
@@ -66,6 +83,8 @@
             [(ngModel)]="vendor.contact"
             autocomplete="off"
           >
+
+          <!-- email input -->
           <label class="one-third label-left" for="email">
             Email
           </label>
@@ -81,6 +100,8 @@
 
         <!-- second column -->
         <div class="one-half">
+
+          <!-- webAddress input -->
           <label class="one-third label-left" for="webAddress">
             Web Address
           </label>
@@ -92,6 +113,8 @@
             [(ngModel)]="vendor.webAddress"
             autocomplete="off"
           >
+
+          <!-- signOn input -->
           <label class="one-third label-left" for="webSignon">
             Sign On
           </label>
@@ -103,6 +126,8 @@
             [(ngModel)]="vendor.webSignon"
             autocomplete="off"
           >
+
+          <!-- password input -->
           <label class="one-third label-left" for="webPassword">
             Password
           </label>
@@ -114,6 +139,8 @@
             [(ngModel)]="vendor.webPassword"
             autocomplete="off"
           >
+
+          <!-- notes input -->
           <label class="one-third label-left" for="notes">
             Notes
           </label>

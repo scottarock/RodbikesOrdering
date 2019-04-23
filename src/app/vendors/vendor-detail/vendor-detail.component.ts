@@ -12,6 +12,7 @@ export class VendorDetailComponent implements OnInit {
 
   @Input() vendor: Vendor;
   @Output() closeModal: EventEmitter<void> = new EventEmitter;
+  @Output() savedVendor: EventEmitter<Vendor> = new EventEmitter;
 
   constructor(private vendorService: VendorService) { }
 
@@ -19,7 +20,7 @@ export class VendorDetailComponent implements OnInit {
   }
 
   modalClicked(event: Event): void {
-    // if click occurs on the modal window, don't want to close window
+    // if click occurs inside the modal window, don't want to close window
     event.stopPropagation();
   }
 
@@ -29,10 +30,12 @@ export class VendorDetailComponent implements OnInit {
   }
 
   updateClicked(): void {
+    // save the changed vendor to the database and send it to the vendor list
     this.vendorService.updateVendor(this.vendor)
       .subscribe(
         updatedVendor => {
           this.vendor = updatedVendor;
+          this.savedVendor.emit(Object.assign(new Vendor(), updatedVendor));
           this.closeModal.emit();
         },
         error => {

@@ -10,51 +10,87 @@
     <form #form="ngForm">
       <div *ngIf="item">
 
+        <!-- description input and errors -->
         <div>
           <label class="one-sixth label-left" for="description">
             Description
           </label>
-          <input
-            class="five-sixths"
-            type="text"
-            id="description"
-            name="description"
-            required
-            [(ngModel)]="item.description"
-            autocomplete="off"
-          >
+          <div class="five-sixths">
+            <input
+              class="five-sixths"
+              type="text"
+              id="description"
+              name="description"
+              required
+              [(ngModel)]="item.description"
+              autocomplete="off"
+              #description="ngModel"
+            >
+            <div class="warning" *ngIf="description.touched && description.invalid">
+              <p *ngIf="description.errors.required">
+                Description is required
+              </p>
+            </div>
+          </div>
         </div>
 
+        <!-- first column -->
         <div class="one-half">
+
+          <!-- quantity input and errors -->
           <div>
             <label class="one-third label-left" for="quantity">
               Quantity
             </label>
-            <input
-              class="two-thirds"
-              type="number"
-              id="quantity"
-              name="quantity"
-              min=1
-              required
-              [(ngModel)]="item.quantity"
-              autocomplete="off"
-            >
+            <div class="two-thirds">
+              <input
+                [ngClass]="{'invalid': (item.quantity < 1)}"
+                type="number"
+                id="quantity"
+                name="quantity"
+                min=1
+                required
+                [(ngModel)]="item.quantity"
+                autocomplete="off"
+                #quantity="ngModel"
+              >
+              <div class="warning" *ngIf="quantity.touched && quantity.invalid">
+                <p *ngIf="quantity.errors.required">
+                  Quantity is required
+                </p>
+              </div>
+              <div class="warning" *ngIf="item.quantity < 1">
+                <p>
+                  Quantity should be at least 1
+                </p>
+              </div>
+            </div>
           </div>
+
+          <!-- requestedBy input and errors -->
           <div>
             <label class="one-third label-left" for="requestedBy">
               Requested By
             </label>
-            <input
-              class="two-thirds"
-              type="text"
-              id="requestedBy"
-              name="requestedBy"
-              required
-              [(ngModel)]="item.requestedBy"
-              autocomplete="off"
-            >
+            <div class="two-thirds">
+              <input
+                type="text"
+                id="requestedBy"
+                name="requestedBy"
+                required
+                [(ngModel)]="item.requestedBy"
+                autocomplete="off"
+                #requestedBy="ngModel"
+              >
+              <div class="warning" *ngIf="requestedBy.touched && requestedBy.invalid">
+                <p *ngIf="requestedBy.errors.required">
+                  Requested By is required
+                </p>
+              </div>
+            </div>
           </div>
+
+          <!-- department input and errors -->
           <div>
             <label class="one-third label-left" for="department">
               Department
@@ -75,6 +111,8 @@
               <option value="Frame">Frame</option>
             </select>
           </div>
+
+          <!-- specialOrder input -->
           <div>
             <label class="one-third label-left" for="specialOrder">
               Special Order
@@ -92,6 +130,8 @@
               [(ngModel)]="item.specialOrder"
             >No<br>
           </div>
+
+          <!-- customer input -->
           <div>
             <label class="one-third label-left" for="customer">
               Customer
@@ -107,7 +147,10 @@
           </div>
         </div>
 
+        <!-- second column -->
         <div class="one-half">
+
+          <!-- vendor input -->
           <div>
             <label class="one-third label-left" for="vendorName">
               Vendor
@@ -127,6 +170,8 @@
               </option>
             </datalist>
           </div>
+
+          <!-- partNumber input -->
           <div>
             <label class="one-third label-left" for="partNumber">
               Part Number
@@ -140,6 +185,8 @@
               autocomplete="off"
             >
           </div>
+
+          <!-- cost input -->
           <div>
             <label class="one-third label-left" for="cost">
               Cost
@@ -155,6 +202,8 @@
               #cost
             >
           </div>
+
+          <!-- price input -->
           <div>
             <label class="one-third label-left" for="price">
               Price
@@ -172,6 +221,8 @@
           </div>
 
           <div class="two-thirds right">
+
+            <!-- shipping field -->
             <div class="spaced">
               <label class="one-half label-left" for="shipping">
                 Shipping per Item -
@@ -180,6 +231,8 @@
                 {{ item?.shipping | currency: symbol }}
               </div>
             </div>
+
+            <!-- extendedCost field -->
             <div class="spaced">
               <label class="one-half label-left" for="extendedCost">
                 Extended Cost -
@@ -188,6 +241,8 @@
                 {{ item?.extendedCost() | currency: symbol }}
               </div>
             </div>
+
+            <!-- shippedCost field -->
             <div class="spaced">
               <label class="one-half label-left" for="shippedCost">
                 Shipped Cost -
@@ -196,6 +251,8 @@
                 {{ item?.costWithShipping() | currency: symbol }}
               </div>
             </div>
+
+            <!-- code.field -->
             <div class="spaced">
               <label class="one-half label-left" for="code">
                 Code -
@@ -204,6 +261,7 @@
                 {{ item?.code() | priceCode }}
               </div>
             </div>
+
           </div>
 
         </div>

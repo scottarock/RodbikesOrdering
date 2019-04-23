@@ -4,6 +4,7 @@
   [item]="selectedItem"
   (click)="closeModal($event)"
   (closeModal)="closeModal($event)"
+  (savedItem)=itemSaved($event);
 >
 </app-item-detail>
 <app-item-new
@@ -24,7 +25,9 @@
   <tbody>
     <tr *ngFor="let item of items">
       <td class="center-text">{{ item.quantity }}</td>
-      <td><span class="link" (click)="itemDetail(item)">{{ item.description }}</span></td>
+      <td>
+        <span class="link" (click)="itemDetail(item)">{{ item.description }}</span>
+      </td>
       <td>{{ item.vendorName }}</td>
       <td>{{ item.requestedOn | date: "MM/dd/yyyy" }}</td>
       <td><button (click)="onDelete(item)">Delete</button></td>

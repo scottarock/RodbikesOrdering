@@ -60,8 +60,15 @@ export class VendorListComponent implements OnInit {
 
   vendorDetail(vendor: Vendor): void {
     // set the selected vendor and enable modal view of vendor detail component
-    this.selectedVendor = vendor;
+    this.selectedVendor = Object.assign(new Vendor(), vendor);
     this.modalDisplay = 'block';
+  }
+
+  vendorSaved(updatedVendor: Vendor): void {
+    // replace the appropriate vendor with the updated one
+    this.vendors = this.vendors.map( vendor => {
+      return vendor._id === updatedVendor._id ? updatedVendor : vendor;
+    });
   }
 
   closeModal(event: Event): void {

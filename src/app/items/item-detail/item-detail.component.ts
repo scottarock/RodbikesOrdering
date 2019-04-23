@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { Item, Order } from '../../models';
+import { Item } from '../../models';
 import { ItemService, VendorService } from '../../services';
 import { changeCurrencyInput } from '../../shared/formatted-input-handlers';
 
@@ -13,6 +13,7 @@ export class ItemDetailComponent implements OnInit {
 
   @Input() item: Item;
   @Output() closeModal: EventEmitter<void> = new EventEmitter();
+  @Output() savedItem: EventEmitter<Item> = new EventEmitter();
   vendorList: string[] = [];
 
   constructor(
@@ -21,6 +22,7 @@ export class ItemDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    // get the list of all vendor names to have as a list
     const query = {
       sort: 'name',
       fields: 'name',
@@ -37,18 +39,22 @@ export class ItemDetailComponent implements OnInit {
   }
 
   modalClicked(event: Event): void {
+    // if click occurs inside the modal window, don't want to close window
     event.stopPropagation();
   }
 
   closeClicked(): void {
+    // click event from the close button in the modal window
     this.closeModal.emit();
   }
 
   updateClicked(): void {
+    // save the changed item to the database and send it to the item list
     this.itemService.updateItem(this.item)
       .subscribe(
         updatedItem => {
           this.item = updatedItem;
+          this.savedItem.emit(Object.assign(new Item(), this.item));
           this.closeModal.emit();
         },
         error => {
