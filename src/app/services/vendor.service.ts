@@ -9,10 +9,12 @@ import { Vendor } from '../models';
 })
 export class VendorService {
 
+  // the base url for the vendor api
   base: string = '/api/vendors';
 
   constructor(private http: HttpClient) { }
 
+  // call server to get Vendors that match the findParams object
   getVendors(findParams: Object = {}): Observable<Vendor[]> {
     return this.http.get<Vendor[]>(
       this.base,
@@ -20,10 +22,12 @@ export class VendorService {
     );
   }
 
+  // call server to create a new Vendor in the database
   addVendor(vendor: Vendor): Observable<Vendor> {
     return this.http.post<Vendor>(this.base, vendor);
   }
 
+  // call server to delete a Vendor from the database
   updateVendor(vendor: Vendor): Observable<Vendor> {
     return this.http.post<Vendor>(`${this.base}/${vendor._id}`, vendor);
   }

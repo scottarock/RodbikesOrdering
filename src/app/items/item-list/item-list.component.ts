@@ -38,8 +38,7 @@ export class ItemListComponent implements OnInit {
           // convert generic Objects into Item objects
           const itemList: Item[] = [];
           items.map(item => {
-            let newItem = new Item();
-            itemList.push(Object.assign(newItem, item));
+            itemList.push(Object.assign(new Item(), item));
           });
           // set the items array to the list of Item objects
           this.items = itemList;

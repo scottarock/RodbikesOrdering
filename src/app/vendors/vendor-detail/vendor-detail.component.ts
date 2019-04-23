@@ -10,8 +10,11 @@ import { VendorService } from '../../services';
 })
 export class VendorDetailComponent implements OnInit {
 
+  // the vendor that is being viewed
   @Input() vendor: Vendor;
+  // event to close this modal component
   @Output() closeModal: EventEmitter<void> = new EventEmitter;
+  // event to let the parent component know that the vendor is updated
   @Output() savedVendor: EventEmitter<Vendor> = new EventEmitter;
 
   constructor(private vendorService: VendorService) { }

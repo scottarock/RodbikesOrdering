@@ -12,8 +12,11 @@ import { changeCurrencyInput } from '../../shared/formatted-input-handlers';
 })
 export class ItemNewComponent implements OnInit {
 
+  // event to notify parent that a new item is created
   @Output() newItem: EventEmitter<Item> = new EventEmitter();
+  // new item for creation
   item: Item = new Item();
+  // list of vendor names to use
   vendorList: string[] = [];
 
   constructor(
@@ -42,9 +45,8 @@ export class ItemNewComponent implements OnInit {
     this.itemService.addItem(this.item)
       .subscribe(
         addedItem => {
-          let tempItem = new Item();
           // transform item from generic Object to Item object and emit
-          this.newItem.emit(Object.assign(tempItem, addedItem));
+          this.newItem.emit(Object.assign(new Item(), addedItem));
           this.item = new Item();
           form.reset(this.item);
         },

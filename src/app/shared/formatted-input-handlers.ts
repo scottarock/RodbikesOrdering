@@ -1,5 +1,10 @@
 import { Item, Order } from '../models';
 
+// Service to allow for string formatting of currency and date properties
+// in forms. These methods convert the values and set the properties appropriately
+
+// input is a form input from an html page
+// currencyObject is the Object that has a number property that is a currency
 export function changeCurrencyInput(
   input: any,
   currencyObject: (Item | Order)): void
@@ -11,6 +16,8 @@ export function changeCurrencyInput(
       currencyObject[input.name] = parseFloat(newValue);
     };
 
+// input is a form input from an html page
+// dateObject is the Object that has a Date property
 export function changeDateInput(
   input: any,
   dateObject: (Item | Order)): void

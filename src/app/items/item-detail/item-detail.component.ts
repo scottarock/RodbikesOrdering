@@ -11,9 +11,13 @@ import { changeCurrencyInput } from '../../shared/formatted-input-handlers';
 })
 export class ItemDetailComponent implements OnInit {
 
+  // the item to show details
   @Input() item: Item;
+  // event to close this modal component
   @Output() closeModal: EventEmitter<void> = new EventEmitter();
+  // event to let the parent component know that the item is updated
   @Output() savedItem: EventEmitter<Item> = new EventEmitter();
+  // list of vendor names for item
   vendorList: string[] = [];
 
   constructor(
@@ -53,8 +57,7 @@ export class ItemDetailComponent implements OnInit {
     this.itemService.updateItem(this.item)
       .subscribe(
         updatedItem => {
-          this.item = updatedItem;
-          this.savedItem.emit(Object.assign(new Item(), this.item));
+          this.savedItem.emit(Object.assign(new Item(), updatedItem));
           this.closeModal.emit();
         },
         error => {

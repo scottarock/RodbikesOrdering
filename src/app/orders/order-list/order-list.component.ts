@@ -10,11 +10,13 @@ import { OrderService } from '../../services';
 })
 export class OrderListComponent implements OnInit {
 
+  // the list of orders
   orders: Order[];
 
   constructor(private orderService: OrderService) { }
 
   ngOnInit() {
+    // get the orders for the list
     this.orderService.getOrders()
       .subscribe (
         orders => {

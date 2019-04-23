@@ -11,10 +11,15 @@ import { changeDateInput, changeCurrencyInput } from '../../shared/formatted-inp
 })
 export class OrderDetailComponent implements OnInit {
 
+  // the order to place
   @Input() order: Order;
+  // event to let parent component know that the order is completed
   @Output() orderCompleted = new EventEmitter<Order>();
+  // event to let parent component know that the order is cancelled
   @Output() orderCancelled = new EventEmitter<Order>();
+  // event to let parent component know that the one of the items has been changed
   @Output() itemModified = new EventEmitter<Item>();
+  // the vendor for the order
   vendor: Vendor = new Vendor;
 
   constructor(
@@ -47,6 +52,7 @@ export class OrderDetailComponent implements OnInit {
   }
 
   pendOrder() {
+    // TODO: pend an order
     console.log('gonna pend this order =>', this.order);
   }
 
@@ -54,16 +60,15 @@ export class OrderDetailComponent implements OnInit {
     this.orderCancelled.emit(this.order);
   }
 
-  saveItem() {
-    console.log("Save the item now!")
-  }
-
   onDateChange(input: any, dateObject: Order): void {
+    // convert string to date and assign
     changeDateInput(input, dateObject);
   };
 
   onCurrencyChange(input: any, currencyObject: Item | Order): void {
+    // convert string to number and assign
     changeCurrencyInput(input, currencyObject);
+    // if it is an item, we should save change to database
     if ( currencyObject instanceof Item ) {
       this.itemModified.emit(currencyObject as Item);
     }

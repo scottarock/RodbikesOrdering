@@ -5,6 +5,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class PriceCodePipe implements PipeTransform {
 
+  // pipe to format the price code as 6 numbers long with leading 0s as needed
+
   transform(value: number): string {
     let priceCode: string = null
     if ( value ) {

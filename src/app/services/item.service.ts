@@ -9,6 +9,7 @@ import { Item } from '../models';
 })
 export class ItemService {
 
+  // the base url for the item api
   base: string = '/api/items';
 
   constructor(private http: HttpClient) { }

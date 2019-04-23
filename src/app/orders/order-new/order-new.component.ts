@@ -71,7 +71,7 @@ export class OrderNewComponent implements OnInit {
             this.order.poNumber = orders.length ? orders[0].poNumber + 1 : 100;
             this.order.vendorName = this.vendorName;
             this.order.dateOrdered = new Date();
-            return this.orderService.createOrder(this.order);
+            return this.orderService.addOrder(this.order);
           })
         ),
       // get the items for the order
@@ -160,6 +160,8 @@ export class OrderNewComponent implements OnInit {
   }
 
   canNavigate(): Observable<boolean> {
+    // method called by the route guard to check to
+    // see if it is okay to leave order in progress
     const message = 'Leaving the ordering tab will cause the order to be cancelled. Do you wish to do this?'
 
     if ( this.safeToLeave ) {

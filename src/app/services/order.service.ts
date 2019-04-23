@@ -9,11 +9,12 @@ import { Order } from '../models';
 })
 export class OrderService {
 
+  // the base url for the order api
   base: string = '/api/orders';
 
   constructor(private httpClient: HttpClient) { }
 
-  // call server to get Orders that match the getParms object
+  // call server to get Orders that match the findParams object
   getOrders(findParams: Object = {}): Observable<Order[]> {
     return this.httpClient.get<Order[]>(
       this.base,
@@ -22,7 +23,7 @@ export class OrderService {
   }
 
   // call server to create a new Order in database
-  createOrder(order: Order): Observable<Order> {
+  addOrder(order: Order): Observable<Order> {
     return this.httpClient.post<Order>(this.base, order);
   }
 
