@@ -1,3 +1,68 @@
-<p>
-  order-view works!
-</p>
+<div class="modal-content" (click)="modalClicked($event)">
+  <span
+    class="close-modal"
+    (click)="closeClicked()"
+  >
+    &times;
+  </span>
+
+  <!-- order information -->
+  <fieldset class="padded">
+    <h3 class="one-half spaced">Vendor - {{ order?.vendorName }}</h3>
+    <h3 class="one-half spaced right-text">PO Number - {{ order?.poNumber }}</h3>
+
+    <!-- first column -->
+    <div class="one-half spaced">
+      <p>
+        <span class="one-third label-left">Date Ordered:</span>
+        {{ order?.dateOrdered | date: "MM/dd/yyyy" }}
+      </p>
+      <p>
+        <span class="one-third label-left">Order Number:</span>
+        {{ order?.orderNumber }}
+      </p>
+      <p>
+        <span class="one-third label-left">Shipping Cost:</span>
+        {{ order?.shippingCost | currency: symbol }}
+      </p>
+    </div>
+
+    <!-- second column -->
+    <div class="one-half spaced">
+      <p>Notes:</p>
+      <p class="bordered padded">{{ order?.notes }}</p>
+    </div>
+
+    <!-- item information -->
+    <table class="spaced">
+      <colgroup>
+        <col style="width: 8%">
+        <col style="width: 44%">
+        <col style="width: 24%">
+        <col style="width: 12%">
+        <col style="width: 12%">
+      </colgroup>
+      <thead>
+        <tr>
+          <th>Qty</th>
+          <th>Description</th>
+          <th>Part Number</th>
+          <th>Cost</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of order?.items">
+          <td class="center-text">{{ item.quantity }}</td>
+          <td>{{ item.description }}</td>
+          <td>{{ item.partNumber }}</td>
+          <td class="right-text">{{ item.cost | currency: symbol }}</td>
+          <td class="right-text">{{ item.price | currency: symbol }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <button class="one-third right" (click)="closeClicked()">Close</button>
+
+  </fieldset>
+</div>

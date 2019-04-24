@@ -12,8 +12,10 @@ export class OrderListComponent implements OnInit {
 
   // the list of orders
   orders: Order[];
-  // flag to show the complete order view modal
-  showOrder: false;
+  // order selected to view the details
+  selectedOrder: Order = null;
+  // value for the 'display' style of the modal order view component
+  modalDisplay: string = 'none';
 
   constructor(private orderService: OrderService) { }
 
@@ -28,6 +30,22 @@ export class OrderListComponent implements OnInit {
           console.log(error);
         }
       );
+  }
+
+  orderView(order: Order): void {
+    // set the selected order and enable the modal view of the order view component
+    this.selectedOrder = Object.assign(new Order(), order);
+    this.modalDisplay = 'block';
+  }
+
+  closeModal(event: Event): void {
+    if (event) {
+      // stop the click event from propogating further
+      event.stopPropagation();
+    }
+    // close the modal view of the order view component and clear selected order
+    this.modalDisplay = 'none';
+    this.selectedOrder = null;
   }
 
 }

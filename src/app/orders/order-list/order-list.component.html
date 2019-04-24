@@ -1,4 +1,11 @@
-<app-order-view></app-order-view>
+<app-order-view
+  class="modal"
+  [ngStyle]="{'display': modalDisplay}"
+  [order]="selectedOrder"
+  (click)="closeModal($event)"
+  (closeModal)="closeModal($event)"
+>
+</app-order-view>
 <table>
   <colgroup>
     <col style="width: 15%">
@@ -17,7 +24,9 @@
   <tbody>
     <tr *ngFor="let order of orders">
       <td class="center-text">{{ order.poNumber }}</td>
-      <td>{{ order.vendorName }}</td>
+      <td>
+        <span class="link" (click)=orderView(order)>{{ order.vendorName }}</span>
+      </td>
       <td class="center-text">{{ order.status }}</td>
       <td class="center-text">{{ order.dateOrdered | date: "MM/dd/yyyy" }}</td>
     </tr>

@@ -2,9 +2,11 @@
   <form>
     <h3 class="spaced">PO Number - {{ order.poNumber }}</h3>
 
+    <!-- vendor information -->
     <fieldset class="padded spaced">
       <p class="spaced">Vendor - {{ order.vendorName }}</p>
 
+      <!-- first column -->
       <div class="one-half">
         <p>
           <span class="one-third label-left">Account Number</span>
@@ -28,6 +30,7 @@
         </p>
       </div>
 
+      <!-- second column -->
       <div class="one-half">
         <p>
           <span class="one-third label-left">Web Address</span>
@@ -49,7 +52,10 @@
 
     </fieldset>
 
+    <!-- order information -->
     <div class="one-half">
+
+      <!-- first column -->
       <label
         for="dateOrdered"
         class="one-third label-left"
@@ -99,6 +105,7 @@
       >
     </div>
 
+    <!-- second column -->
     <div class="one-half">
       <label
         for="notes"
@@ -135,6 +142,8 @@
     </button>
 
   </form>
+
+  <!-- item information -->
   <table>
     <colgroup>
       <col style="width:8%">

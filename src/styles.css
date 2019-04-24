@@ -170,6 +170,12 @@ input.invalid, select.invalid, .ng-touched.ng-invalid:not(form) {
   /* background-color: rgba(255, 0, 0, 0.13); */
 }
 
+.bordered {
+  min-height: 42px;
+  border: 1px solid darkgray;
+  border-radius: 3px;
+}
+
 .link {
   padding: 1px 4px;
   text-decoration: underline;

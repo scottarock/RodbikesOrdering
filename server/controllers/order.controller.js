@@ -12,6 +12,7 @@ module.exports = {
       .skip(skip)
       .limit(limit)
       .select(projection)
+      .populate('items')
       .then( orders => {
         response.json(orders)
       } )
