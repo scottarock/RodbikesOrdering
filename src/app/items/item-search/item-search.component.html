@@ -1,3 +1,5 @@
-<p>
-  item-search works!
-</p>
+<app-item-new
+  [searchOrCreate]="true"
+  (itemList)="itemsFound($event)"
+></app-item-new>
+{{ items | json }}
