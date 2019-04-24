@@ -12,6 +12,8 @@ export class OrderListComponent implements OnInit {
 
   // the list of orders
   orders: Order[];
+  // flag to show the complete order view modal
+  showOrder: false;
 
   constructor(private orderService: OrderService) { }
 
