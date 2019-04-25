@@ -6,7 +6,6 @@ module.exports = {
   // need to add populate() to get order and vendor data
 
   index(request, response) {
-    console.log(queryParams(request.query));
     // get any query parameters from the api request
     const { filter, skip, limit, sort, projection } = queryParams(request.query);
     // use the query object to find items requested

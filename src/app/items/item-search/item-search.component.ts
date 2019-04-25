@@ -17,7 +17,6 @@ export class ItemSearchComponent implements OnInit {
   }
 
   itemsFound(items: Item[]) {
-    console.log('received item list', items)
     this.items = items;
   }
 

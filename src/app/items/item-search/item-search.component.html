@@ -1,5 +1,26 @@
-<app-item-new
-  [searchOrCreate]="true"
+<app-item-search-entry
   (itemList)="itemsFound($event)"
-></app-item-new>
-{{ items | json }}
+></app-item-search-entry>
+
+<table>
+  <thead>
+    <tr>
+      <th>Qty</th>
+      <th>Status</th>
+      <th>Description</th>
+      <th>Vendor</th>
+      <th>Requested</th>
+      <th>Ordered</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of items">
+      <td class="center-text">{{ item?.quantity }}</td>
+      <td>{{ item?.status }}
+      <td>{{ item?.description }}</td>
+      <td>{{ item?.vendorName }}</td>
+      <td>{{ item?.requestedOn | date: "MM/dd/yyyy" }}</td>
+      <td>{{ item?.orderedOn | date: "MM/dd/yyyy" }}</td>
+    </tr>
+  </tbody>
+</table>

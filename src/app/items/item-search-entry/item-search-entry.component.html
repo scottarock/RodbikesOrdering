@@ -1,3 +1,204 @@
-<p>
-  item-search-entry works!
-</p>
+<fieldset class="padded spaced">
+  <h3 class="spaced">Find Items</h3>
+  <form #form="ngForm">
+
+    <div>
+      <!-- description input -->
+      <label class="one-sixth label-left" for="description">
+        Description
+      </label>
+      <div class="five-sixths">
+        <input
+          type="text"
+          id="description"
+          name="description"
+          autocomplete="off"
+          ngModel
+          #description="ngModel"
+        >
+      </div>
+    </div>
+
+    <!-- first column -->
+    <div class="one-third">
+
+      <!-- vendor input -->
+      <div>
+        <label class="one-third label-left" for="vendorName">
+          Vendor
+        </label>
+        <input
+          class="two-thirds"
+          type="text"
+          id="vendorName"
+          name="vendorName"
+          ngModel
+          #vendorName="ngModel"
+          list="vendorList"
+        >
+        <datalist id="vendorList">
+          <option *ngFor="let vendor of vendors">
+            {{ vendor }}
+          </option>
+        </datalist>
+      </div>
+
+      <!-- part number input -->
+      <div>
+        <label class="one-third label-left" for="partNumber">
+          Part Number
+        </label>
+        <input
+          class="two-thirds"
+          type="text"
+          id="partNumber"
+          name="partNumber"
+          ngModel
+          #partNumber="ngModel"
+        >
+      </div>
+
+      <!-- po number input -->
+      <div>
+        <label class="one-third label-left" for="poNumber">
+          PO Number
+        </label>
+        <input
+          class="two-thirds"
+          type="text"
+          id="poNumber"
+          name="poNumber"
+          ngModel
+          #poNumber="ngModel"
+        >
+      </div>
+
+      <!-- customer input -->
+      <div>
+        <label class="one-third label-left" for="customer">
+          Customer
+        </label>
+        <input
+          class="two-thirds"
+          type="text"
+          id="customer"
+          name="customer"
+          ngModel
+          #customer="ngModel"
+        >
+      </div>
+
+    </div>
+
+    <!-- second column -->
+    <div class="one-third">
+
+      <!-- status input -->
+      <div>
+        <label class="one-half label-left" for="status">
+          Status
+        </label>
+        <input
+          class="one-half"
+          type="text"
+          id="status"
+          name="status"
+          ngModel
+          #status="ngModel"
+        >
+      </div>
+
+      <!-- requested on input -->
+      <div>
+        <label class="one-half label-left" for="requestedOn">
+          Requested On
+        </label>
+        <input
+          class="one-half"
+          type="date"
+          id="requestedOn"
+          name="requestedOn"
+          ngModel
+          #requestedOn="ngModel"
+        >
+      </div>
+
+      <!-- ordered on input -->
+      <div>
+        <label class="one-half label-left" for="orderdOn">
+          Ordered On
+        </label>
+        <input
+          class="one-half"
+          type="date"
+          id="orderdOn"
+          name="orderdOn"
+          ngModel
+          #orderdOn="ngModel"
+        >
+      </div>
+
+    </div>
+
+    <!-- third column -->
+    <div class="one-third">
+
+      <!-- department input -->
+      <div>
+        <label class="one-half label-left" for="department">
+          Department
+        </label>
+        <div class="one-half">
+          <select
+            type="text"
+            id="department"
+            name="department"
+            ngModel
+            #department="ngModel"
+          >
+            <option value="">Any</option>
+            <option value="R+E">R+E</option>
+            <option value="SBR">SBR</option>
+            <option value="OEM">OEM</option>
+            <option value="Paint">Paint</option>
+            <option value="Frame">Frame</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- requested by input -->
+      <div>
+        <label class="one-half label-left" for="requestedBy">
+          Requested By
+        </label>
+        <div class="one-half">
+          <input
+            type="text"
+            id="requestedBy"
+            name="requestedBy"
+            ngModel
+            #requestedBy="ngModel"
+          >
+        </div>
+      </div>
+
+      <!-- quantity input -->
+      <label class="one-half label-left" for="quantity">
+        Quantity
+      </label>
+      <div class="one-half">
+        <input
+          type="number"
+          id="quantity"
+          name="quantity"
+          ngModel
+          #quantity="ngModel"
+        >
+      </div>
+
+    </div>
+
+    <button class="one-third right" (click)="onSubmit(form)">Find Items</button>
+    <button class="one-third right" (click)="onClearForm(form)">Reset Search</button>
+  </form>
+</fieldset>
