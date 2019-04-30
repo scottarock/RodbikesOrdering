@@ -98,7 +98,7 @@
         <label class="one-half label-left" for="status">
           Status
         </label>
-        <input
+        <select
           class="one-half"
           type="text"
           id="status"
@@ -106,6 +106,14 @@
           ngModel
           #status="ngModel"
         >
+          <option value="">Any</option>
+          <option value="Wanted">Wanted</option>
+          <option value="Pending">Pending</option>
+          <option value="Ordered">Ordered</option>
+          <option value="Back Ordered">Back Ordered</option>
+          <option value="Received">Received</option>
+          <option value="Not Available">Not Available</option>
+        </select>
       </div>
 
       <!-- requested on input -->
@@ -115,7 +123,7 @@
         </label>
         <input
           class="one-half"
-          type="date"
+          type="text"
           id="requestedOn"
           name="requestedOn"
           ngModel
@@ -130,7 +138,7 @@
         </label>
         <input
           class="one-half"
-          type="date"
+          type="text"
           id="orderdOn"
           name="orderdOn"
           ngModel
@@ -188,7 +196,7 @@
       </label>
       <div class="one-half">
         <input
-          type="number"
+          type="text"
           id="quantity"
           name="quantity"
           ngModel

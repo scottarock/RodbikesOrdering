@@ -44,7 +44,7 @@ export class ItemSearchEntryComponent implements OnInit {
         delete form.value[key];
       }
     });
-    this.itemService.getItems(form.value)
+    this.itemService.searchItems(form.value)
       .subscribe(
         items => {
           this.itemList.emit(items);
@@ -56,7 +56,7 @@ export class ItemSearchEntryComponent implements OnInit {
   }
 
   onClearForm(form: NgForm): void {
-    form.reset();
+    form.reset({status:'', department:''});
   }
 
 }

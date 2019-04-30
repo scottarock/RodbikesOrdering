@@ -10,6 +10,7 @@ import { Item } from '../../models';
 export class ItemSearchComponent implements OnInit {
 
   items: Item[] = [];
+  message: string = '';
 
   constructor() { }
 
@@ -17,6 +18,9 @@ export class ItemSearchComponent implements OnInit {
   }
 
   itemsFound(items: Item[]) {
+    this.message = items.length === 0
+      ? 'No items matched'
+      : `${items.length} items found`;
     this.items = items;
   }
 
