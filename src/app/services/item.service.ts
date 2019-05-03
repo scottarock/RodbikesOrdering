@@ -18,6 +18,7 @@ export class ItemService {
   // call server to search for items that meet the query parameters
   searchItems(itemQuery: Object = {}): Observable<Item[]> {
 
+    // the Item properties that are strings
     const stringProperties: string[] = [
       'description',
       'requestedBy',
@@ -28,6 +29,7 @@ export class ItemService {
       'partNumber',
       'status'
     ];
+    // the Item properties that are numbers
     const numberProperties: string[] = [
       'quantity',
       'cost',
@@ -35,22 +37,14 @@ export class ItemService {
       'shipping',
       'poNumber'
     ];
+    // the Item properties that are dates
     const dateProperties: string[] = [
       'requestedOn',
       'orderedOn'
     ]
 
-    // EXAMPLE QUERY
-    // 'description=/\\bblue|\\bdisc/i&requestedOn>=3/1/2019&requestedOn<=3/10/2019';
-
-    // RESULTS ON SERVER
-    // filter = {
-    //   description: /\bblue|\bdisc/i,
-    //   requestedOn: { '$gte': '3/1/2019', '$lte': '3/10/2019' }
-    // }
-    console.log(itemQuery);
-
     let urlQuery: string = '';
+    // go through each property and create the url search string for it
     Object.keys(itemQuery).forEach(key => {
       urlQuery += urlQuery.length === 0 ? '?' : '&';
       if (stringProperties.includes(key)) {
@@ -62,6 +56,7 @@ export class ItemService {
       }
     });
 
+    // use the query created to search the database
     return this.http.get<Item[]>(`${this.base}${urlQuery}`);
   }
 

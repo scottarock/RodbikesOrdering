@@ -17,7 +17,6 @@
           </label>
           <div class="five-sixths">
             <input
-              class="five-sixths"
               type="text"
               id="description"
               name="description"
@@ -227,7 +226,7 @@
               <label class="one-half label-left" for="shipping">
                 Shipping per Item -
               </label>
-              <div class="one-half">
+              <div class="one-half" id="shipping">
                 {{ item?.shipping | currency: symbol }}
               </div>
             </div>

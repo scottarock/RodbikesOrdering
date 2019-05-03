@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { Observable, forkJoin, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
-import { Order, Item } from '../../models';
-import { OrderService, ItemService, DialogService } from '../../services';
+import { Order, Item, Vendor } from '../../models';
+import { OrderService, ItemService, VendorService, DialogService } from '../../services';
 
 @Component({
   selector: 'app-order-new',
@@ -19,6 +19,8 @@ export class OrderNewComponent implements OnInit {
   vendorList: Set<string>;
   // the name of the vendor to order from
   vendorName: string = "";
+  // the full vendor for the order
+  vendor: Vendor = new Vendor();
   // flag to determine when to show the new order details
   showOrder: boolean = false;
   // flag to determine if it is safe to navigate away from this component
@@ -29,6 +31,7 @@ export class OrderNewComponent implements OnInit {
   constructor(
     private orderService: OrderService,
     private itemService: ItemService,
+    private vendorService: VendorService,
     private router: Router,
   ) { }
 
@@ -62,6 +65,9 @@ export class OrderNewComponent implements OnInit {
       status: 'Wanted',
       vendorName: this.vendorName,
     };
+    const vendorQuery = { // get the vendor with the matching name
+      name: this.vendorName,
+    }
 
     forkJoin(
       // figure out the po number and create order
@@ -75,18 +81,32 @@ export class OrderNewComponent implements OnInit {
           })
         ),
       // get the items for the order
-      this.itemService.getItems(itemQuery)
+      this.itemService.getItems(itemQuery),
+      this.vendorService.getVendors(vendorQuery)
+        .pipe(
+          switchMap( vendors => {
+            vendors.forEach(vendor => {
+              // name is unique, so this should return a single vendor
+              if ( this.vendorName === vendor.name ) {
+                Object.assign(this.vendor, vendor);
+              }
+            })
+            return of(this.vendor);
+          })
+        )
     )
       .subscribe(
         // take the results of the forkjoin and set up order for detail component
         results => {
-          let [ order, items ] = results;
+          let [ order, items, vendor ] = results;
           const itemList: Item[] = [];
 
           // turn generic items into Item objects
           items.map(item => {
             itemList.push(Object.assign(new Item(), item));
           });
+
+          this.vendor = Object.assign(new Vendor(), vendor);
 
           this.order = Object.assign(new Order(), order);
           this.order.items = itemList;

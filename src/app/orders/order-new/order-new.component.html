@@ -35,6 +35,7 @@
 <app-order-detail
   *ngIf="showOrder"
   [order]="order"
+  [vendor]="vendor"
   (orderCompleted)="onOrderCompleted()"
   (orderCancelled)="onOrderCancelled()"
   (itemModified)="onItemChanged($event)"

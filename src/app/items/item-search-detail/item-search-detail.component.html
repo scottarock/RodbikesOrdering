@@ -1,0 +1,166 @@
+<div class="modal-content" (click)="modalClicked($event)">
+  <span
+    class="close-modal"
+    (click)="closeClicked()"
+  >
+    &times;
+  </span>
+  <fieldset class="padded">
+    <h3 class="spaced">Item Details</h3>
+    <div *ngIf="item">
+
+      <!-- description -->
+      <div class=spaced>
+        <label class="on-sixth label-left" for="description">
+          Description -
+        </label>
+        <div class="five-sixths" id="description">
+          {{ item.description }}
+        </div>
+      </div>
+
+      <!-- first column -->
+      <div class="one-third" style="border-right: 1px solid darkgray;">
+
+        <!-- quantity -->
+        <div class="spaced">
+          <label class="one-half label-left" for="quantity">
+            Quantity -
+          </label>
+          <div class="one-half" id="quantity">
+            {{ item.quantity }}
+          </div>
+        </div>
+
+        <!-- status -->
+        <div class="spaced">
+          <label class="one-half label-left" for="status">
+            Status -
+          </label>
+          <div class="one-half" id="status">
+            {{ item.status }}
+          </div>
+        </div>
+
+        <!-- requestedOn -->
+        <div class="spaced">
+          <label class="one-half label-left" for="requestedOn">
+            Requested On -
+          </label>
+          <div class="one-half" id="requestedOn">
+            {{ item.requestedOn | date: 'MM/dd/yyyy' }}
+          </div>
+        </div>
+
+        <!-- orderedOn -->
+        <div class="spaced">
+          <label class="one-half label-left" for="orderedOn">
+            Ordered On -
+          </label>
+          <div class="one-half" id="orderedOn">
+            {{ item.orderedOn | date: 'MM/dd/yyyy' }}
+          </div>
+        </div>
+
+      </div>
+
+      <!-- second column -->
+      <div class="one-third" style="border-right: 1px solid darkgray;">
+
+        <!-- poNumber -->
+        <div class="spaced">
+          <label class="one-half label-left" for="poNumber">
+            PO Number -
+          </label>
+          <div class="one-half" id="poNumber">
+            <span *ngIf="item.poNumber!==-1">{{ item.poNumber }}</span>
+          </div>
+        </div>
+
+        <!-- vendorName -->
+        <div class="spaced">
+          <label class="one-half label-left" for="vendorName">
+            Vendor -
+          </label>
+          <div class="one-half" id="vendorName">
+            {{ item.vendorName }}
+          </div>
+        </div>
+
+        <!-- partNumber -->
+        <div class="spaced">
+          <label class="one-half label-left" for="partNumber">
+            Part Number -
+          </label>
+          <div class="one-half" id="partNumber">
+            {{ item.partNumber }}
+          </div>
+        </div>
+
+        <!-- cost -->
+        <div class="spaced">
+          <label class="one-half label-left" for="cost">
+            Cost -
+          </label>
+          <div class="one-half" id="cost">
+            {{ item.cost | currency: symbol }}
+          </div>
+        </div>
+
+        <!-- price -->
+        <div class="spaced">
+          <label class="one-half label-left" for="price">
+            Price -
+          </label>
+          <div class="one-half" id="price">
+            {{ item.price | currency: symbol }}
+          </div>
+        </div>
+
+      </div>
+
+      <!-- third column -->
+      <div class="one-third">
+
+        <!-- customer -->
+        <div class="spaced">
+          <label class="one-half label-left" for="customer">
+            Customer -
+          </label>
+          <div class="one-half" id="customer">
+            {{ item.customer }}
+          </div>
+        </div>
+
+        <!-- requestedBy -->
+        <div class="spaced">
+          <label class="one-half label-left" for="requestedBy">
+            Requested By -
+          </label>
+          <div class="one-half" id="requestedBy">
+            {{ item.requestedBy }}
+          </div>
+        </div>
+
+        <!-- department -->
+        <div class="spaced">
+          <label class="one-half label-left" for="department">
+            Department -
+          </label>
+          <div class="one-half" id="department">
+            {{ item.department }}
+          </div>
+        </div>
+
+      </div>
+
+      <button
+        class="one-third right"
+        (click)="closeClicked()"
+      >
+        Close
+      </button>
+
+    </div>
+  </fieldset>
+</div>
