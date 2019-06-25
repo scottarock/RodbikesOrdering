@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Niramit');
+@import url('https://fonts.googleapis.com/css?family=Niramit:normal,bold');
 
 * {
   box-sizing: border-box;
@@ -196,6 +196,15 @@ input.invalid, select.invalid, .ng-touched.ng-invalid:not(form) {
 .warning {
   color: red;
   margin: -14px 0px 10px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+/* to get the margin back on a regular list */
+ul.list li, ol.list li {
+  margin-left: 20px;
 }
 
 /* classes for modal displays */
