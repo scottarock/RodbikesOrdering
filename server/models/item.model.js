@@ -22,11 +22,9 @@ const itemSchema = new Schema({
     type: String,
     trim: true,
     enum: [
-      'R+E',
-      'SBR',
-      'OEM',
-      'Paint',
-      'Frame'
+      'Sales',
+      'Service',
+      'Store Use'
     ]
   },
   specialOrder: {
