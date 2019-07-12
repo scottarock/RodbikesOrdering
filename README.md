@@ -1,27 +1,21 @@
-# Ordering
+# Want List
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.1.
+This app is a light weight want list and ordering tracker. It allows for entering items and vendors and placing orders.
 
-## Development server
+## Why?
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+For many small businesses, ordering can be built into the Point of Sale system, but it comes at the cost of inventorying every item and then ensuring that the count stays correct. A fairly monumental task, in the real world. Also, the automation present in most of these systems just put items on the list that are out. This means out of season, discontinued, or just unpopular items may be added when they are not wanted.
 
-## Code scaffolding
+This app allows allows the user to enter and keep information on vendors, add items to the want list as needed and then place and track orders in a straight forward manner.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Development mode
 
-## Build
+Requirements - MongoDB, node.js, and Angular.  
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+This project uses [Node Foreman](https://www.npmjs.com/package/foreman) to start the angular and express servers in development mode. They are included in the dev dependencies, so there is no need to load them.  
 
-## Running unit tests
+With a running MongoDB server, you can start the app with `nf start` for a dev server. The app will automatically open in the browser once the servers have started. The app will automatically reload if you change any of the source files.  
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Structure of code
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+The `server` folder contains all the code used by `server.js` for the backend express server. The `src/app` folder contains all the angular components and services along with the mongoose models.
