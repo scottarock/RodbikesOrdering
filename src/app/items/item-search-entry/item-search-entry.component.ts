@@ -33,7 +33,7 @@ export class ItemSearchEntryComponent implements OnInit {
           this.vendors = vendors.map(vendor => vendor.name);
         },
         error => {
-          console.log(error)
+          console.log(error);
         }
       );
   }
@@ -52,11 +52,11 @@ export class ItemSearchEntryComponent implements OnInit {
         error => {
           console.log(error);
         }
-      )
+      );
   }
 
   onClearForm(form: NgForm): void {
-    form.reset({status:'', department:''});
+    form.reset({status: '', department: ''});
   }
 
 }

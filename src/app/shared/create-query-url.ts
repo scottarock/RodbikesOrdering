@@ -4,16 +4,16 @@
 export function createTextQuery(property: string, text: string): string {
 
   // the query that will be returned
-  let query: string = `${property}=/`;
+  let query = `${property}=/`;
   // the individual words in the text
   const words: string[] = Array.from(text.match(/\S+/g));
 
   // add each individual word to the regular expression for searching
   words.forEach( word => {
-    query += `\\b${word}|`
+    query += `\\b${word}|`;
   });
   // remove the last 'or' and make the search case insensitive
-  query = query.slice(0, query.length-1) + '/i';
+  query = query.slice(0, query.length - 1) + '/i';
 
   return query;
 }
@@ -25,22 +25,20 @@ export function createTextQuery(property: string, text: string): string {
 export function createNumberQuery(property: string, text: string): string {
 
   // find position of any range specifier in text
-  let position = text.search(/[<>-]/);
+  const position = text.search(/[<>-]/);
 
   // no range specifier, look for exactly the number in the text
   if ( position === -1 ) {
-    return `${property}=${parseInt(text)}`;
-  }
-  // used the '-' sign to create a range to search
-  // break the text into two queries, one for each end of the range
-  else if ( text.includes('-') ) {
-    let query: string = '';
-    query = `${property}>=${parseInt(text.slice(0, position))}`;
-    query += `&${property}<=${parseInt(text.slice(position + 1))}`;
+    return `${property}=${parseInt(text, 10)}`;
+  } else if (text.includes('-')) {
+    // used the '-' sign to create a range to search
+    // break the text into two queries, one for each end of the range
+    let query = '';
+    query = `${property}>=${parseInt(text.slice(0, position), 10)}`;
+    query += `&${property}<=${parseInt(text.slice(position + 1), 10)}`;
     return query;
-  }
+  } else {
   // used '>' or '<' for searching, just use the text
-  else {
     return `${property}${text}`;
   }
 }
@@ -52,23 +50,20 @@ export function createNumberQuery(property: string, text: string): string {
 export function createDateQuery(property: string, text: string): string {
 
   // find position of the range specifier (...) in text
-  let position = text.search(/\.{3}/);
+  const position = text.search(/\.{3}/);
 
   // no range specifier, look for exactly the date in the text
   if ( position === -1 ) {
     return `${property}=${text}`;
-  }
-  // specified range prior to a given date
-  else if ( position === 0 ) {
+  } else if ( position === 0 ) {
+    // specified range prior to a given date
     return `${property}<=${text.slice(position + 3)}`;
-  }
-  // specified range after a given date
-  else if ( position === text.length - 3) {
+  } else if ( position === text.length - 3) {
+    // specified range after a given date
     return `${property}>=${text.slice(0, position)}`;
-  }
-  // specified a complete date range
-  else {
-    let query: string = '';
+  } else {
+    // specified a complete date range
+    let query = '';
     query = `${property}>=${text.slice(0, position)}`;
     query += `&${property}<=${text.slice(position + 3)}`;
     return query;
