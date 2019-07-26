@@ -3,6 +3,19 @@
 // text -> text entered by user to search for
 export function createTextQuery(property: string, text: string): string {
 
+  // special characters to be replaced
+  const specialChars = {
+    '$' : '%24',
+    '&' : '%26',
+    '+' : '%2B',
+    ',' : '%2C',
+    '/' : '%2F',
+    ':' : '%3A',
+    ';' : '%3B',
+    '=' : '%3D',
+    '?' : '%3F',
+    '@' : '%40'
+  };
   // the query that will be returned
   let query = `${property}=/`;
   // the individual words in the text
@@ -10,6 +23,11 @@ export function createTextQuery(property: string, text: string): string {
 
   // add each individual word to the regular expression for searching
   words.forEach( word => {
+    Object.keys(specialChars).forEach( key => {
+      while ( word.includes(key) ) {
+        word = word.replace(key, specialChars[key]);
+      }
+    });
     query += `\\b${word}|`;
   });
   // remove the last 'or' and make the search case insensitive
@@ -49,6 +67,7 @@ export function createNumberQuery(property: string, text: string): string {
 // text -> text entered by user to search for
 export function createDateQuery(property: string, text: string): string {
 
+  console.log(`${property} : ${text}`);
   // find position of the range specifier (...) in text
   const position = text.search(/\.{3}/);
 

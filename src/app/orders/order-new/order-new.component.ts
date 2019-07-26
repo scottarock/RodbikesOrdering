@@ -18,13 +18,13 @@ export class OrderNewComponent implements OnInit {
   // the list of vendor names that have items on the want list
   vendorList: Set<string>;
   // the name of the vendor to order from
-  vendorName: string = "";
+  vendorName = '';
   // the full vendor for the order
   vendor: Vendor = new Vendor();
   // flag to determine when to show the new order details
-  showOrder: boolean = false;
+  showOrder = false;
   // flag to determine if it is safe to navigate away from this component
-  safeToLeave: boolean = true;
+  safeToLeave = true;
   // service to create dialogs with user
   dialogService: DialogService = new DialogService;
 
@@ -51,7 +51,7 @@ export class OrderNewComponent implements OnInit {
         error => {
           console.log(error);
         }
-      )
+      );
   }
 
   onStartOrder(): void {
@@ -67,7 +67,7 @@ export class OrderNewComponent implements OnInit {
     };
     const vendorQuery = { // get the vendor with the matching name
       name: this.vendorName,
-    }
+    };
 
     forkJoin(
       // figure out the po number and create order
@@ -90,7 +90,7 @@ export class OrderNewComponent implements OnInit {
               if ( this.vendorName === vendor.name ) {
                 Object.assign(this.vendor, vendor);
               }
-            })
+            });
             return of(this.vendor);
           })
         )
@@ -98,7 +98,7 @@ export class OrderNewComponent implements OnInit {
       .subscribe(
         // take the results of the forkjoin and set up order for detail component
         results => {
-          let [ order, items, vendor ] = results;
+          const [ order, items, vendor ] = results;
           const itemList: Item[] = [];
 
           // turn generic items into Item objects
@@ -162,7 +162,7 @@ export class OrderNewComponent implements OnInit {
               error => {
                 console.log(error);
               }
-            )
+            );
         }
       });
   }
@@ -182,7 +182,7 @@ export class OrderNewComponent implements OnInit {
   canNavigate(): Observable<boolean> {
     // method called by the route guard to check to
     // see if it is okay to leave order in progress
-    const message = 'Leaving the ordering tab will cause the order to be cancelled. Do you wish to do this?'
+    const message = 'Leaving the ordering tab will cause the order to be cancelled. Do you wish to do this?';
 
     if ( this.safeToLeave ) {
       return of(true);

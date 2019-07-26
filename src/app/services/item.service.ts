@@ -11,7 +11,7 @@ import { Item } from '../models';
 export class ItemService {
 
   // the base url for the item api
-  base: string = '/api/items';
+  base = '/api/items';
 
   constructor(private http: HttpClient) { }
 
@@ -41,9 +41,9 @@ export class ItemService {
     const dateProperties: string[] = [
       'requestedOn',
       'orderedOn'
-    ]
+    ];
 
-    let urlQuery: string = '';
+    let urlQuery = '';
     // go through each property and create the url search string for it
     Object.keys(itemQuery).forEach(key => {
       urlQuery += urlQuery.length === 0 ? '?' : '&';

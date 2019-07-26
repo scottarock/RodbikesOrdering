@@ -10,7 +10,7 @@ import { Vendor } from '../models';
 export class VendorService {
 
   // the base url for the vendor api
-  base: string = '/api/vendors';
+  base = '/api/vendors';
 
   constructor(private http: HttpClient) { }
 
