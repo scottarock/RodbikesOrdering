@@ -45,8 +45,8 @@ export function createNumberQuery(property: string, text: string): string {
   // find position of any range specifier in text
   const position = text.search(/[<>-]/);
 
-  // no range specifier, look for exactly the number in the text
   if ( position === -1 ) {
+    // no range specifier, look for exactly the number in the text
     return `${property}=${parseInt(text, 10)}`;
   } else if (text.includes('-')) {
     // used the '-' sign to create a range to search
