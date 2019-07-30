@@ -3,7 +3,7 @@
 // text -> text entered by user to search for
 export function createTextQuery(property: string, text: string): string {
 
-  // special characters to be replaced
+  // special characters that need to be replaced in URL string
   const specialChars = {
     '$' : '%24',
     '&' : '%26',
@@ -67,24 +67,32 @@ export function createNumberQuery(property: string, text: string): string {
 // text -> text entered by user to search for
 export function createDateQuery(property: string, text: string): string {
 
-  console.log(`${property} : ${text}`);
   // find position of the range specifier (...) in text
   const position = text.search(/\.{3}/);
+  let query = '';
 
-  // no range specifier, look for exactly the date in the text
   if ( position === -1 ) {
-    return `${property}=${text}`;
+    // no range specifier, need to create a one day range
+    query = `${property}>=${text}`;
+    query += `&${property}<${addDay(text)}`;
+    return query;
   } else if ( position === 0 ) {
     // specified range prior to a given date
-    return `${property}<=${text.slice(position + 3)}`;
+    return `${property}<=${addDay(text.slice(position + 3))}`;
   } else if ( position === text.length - 3) {
     // specified range after a given date
     return `${property}>=${text.slice(0, position)}`;
   } else {
     // specified a complete date range
-    let query = '';
     query = `${property}>=${text.slice(0, position)}`;
-    query += `&${property}<=${text.slice(position + 3)}`;
+    query += `&${property}<${addDay(text.slice(position + 3))}`;
     return query;
   }
+}
+
+function addDay(dateString) {
+  // takes a string in short date and adds one day to it
+  const queryDate = new Date(dateString);
+  queryDate.setDate(queryDate.getDate() + 1);
+  return queryDate.toLocaleDateString();
 }
