@@ -70,6 +70,7 @@
           type="text"
           id="poNumber"
           name="poNumber"
+          placeholder="use '-' for number range"
           autocomplete="off"
           ngModel
           #poNumber="ngModel"
@@ -130,22 +131,24 @@
           type="text"
           id="requestedOn"
           name="requestedOn"
+          placeholder="use '...' for date range"
           autocomplete="off"
           ngModel
           #requestedOn="ngModel"
-        >
-      </div>
-
-      <!-- ordered on input -->
-      <div>
-        <label class="one-half label-left" for="orderdOn">
-          Ordered On
-        </label>
-        <input
+          >
+        </div>
+        
+        <!-- ordered on input -->
+        <div>
+          <label class="one-half label-left" for="orderedOn">
+            Ordered On
+          </label>
+          <input
           class="one-half"
           type="text"
-          id="orderdOn"
-          name="orderdOn"
+          id="orderedOn"
+          name="orderedOn"
+          placeholder="use '...' for date range"
           autocomplete="off"
           ngModel
           #orderdOn="ngModel"
@@ -204,6 +207,7 @@
           type="text"
           id="quantity"
           name="quantity"
+          placeholder="use '-' for number range"
           autocomplete="off"
           ngModel
           #quantity="ngModel"
