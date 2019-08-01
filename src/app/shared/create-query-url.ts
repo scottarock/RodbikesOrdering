@@ -43,21 +43,26 @@ export function createTextQuery(property: string, text: string): string {
 export function createNumberQuery(property: string, text: string): string {
 
   // find position of any range specifier in text
-  const position = text.search(/[<>-]/);
+  const position = text.search(/\.{3}/);
 
   if ( position === -1 ) {
     // no range specifier, look for exactly the number in the text
     return `${property}=${parseInt(text, 10)}`;
-  } else if (text.includes('-')) {
-    // used the '-' sign to create a range to search
-    // break the text into two queries, one for each end of the range
+  } else if ( position === 0 ) {
+    // specified range less than a given value
+    let query = '';
+    query = `${property}>=0`;
+    query += `&${property}<=${parseInt(text.slice(3), 10)}`;
+    return query;
+  } else if ( position === text.length - 3 ) {
+    // specified range greater than a given value
+    return `${property}>=${parseInt(text.slice(0, position), 10)}`;
+  } else {
+    // min and max value range specified
     let query = '';
     query = `${property}>=${parseInt(text.slice(0, position), 10)}`;
-    query += `&${property}<=${parseInt(text.slice(position + 1), 10)}`;
+    query += `&${property}<=${parseInt(text.slice(position + 3), 10)}`;
     return query;
-  } else {
-  // used '>' or '<' for searching, just use the text
-    return `${property}${text}`;
   }
 }
 
