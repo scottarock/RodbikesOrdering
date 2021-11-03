@@ -31,7 +31,7 @@
     "mongoose-unique-validator": "^2.0.3",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
-    "validator": "^10.11.0",
+    "validator": "^13.7.0",
     "zone.js": "~0.8.29"
   },
   "devDependencies": {
